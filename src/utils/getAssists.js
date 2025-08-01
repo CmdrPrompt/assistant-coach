@@ -30,21 +30,26 @@ export function getAssists(grid, targetPosition, blockerPosition, team) {
     const player = grid?.[pos.row]?.[pos.col]?.player;
     if (!player) continue;
     if (player.team !== team) continue;
-
     if (!player.isStanding()) continue;
 
-    const isEngaged = isAdjacentToOpponent(grid, pos, team, targetPosition);
-    if (!isEngaged || player.hasSkill('Guard')) {
+    if (canAssist(player, grid, pos, team, targetPosition)) {
       count++;
-      
-      // Add player to the list of assisting players
       players.push({
         player: player,
         position: { ...pos },
-        reason: player.hasSkill('Guard') && isEngaged ? 'Guard skill' : 'Not engaged'
+        reason: player.hasSkill && player.hasSkill('Guard') ? 'Guard skill' : 'Not engaged'
       });
     }
   }
 
   return { count, players };
+}
+
+function canAssist(player, grid, pos, team, targetPosition) {
+  // Om spelaren har Guard får hen alltid assistera
+  if (player.hasSkill && player.hasSkill('Guard')) {
+    return true;
+  }
+  // Annars: kontrollera om hen är markerad av motståndare
+  return !isAdjacentToOpponent(grid, pos, team, targetPosition);
 }
