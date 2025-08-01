@@ -51,6 +51,10 @@ const Pitch = () => {
 
   // State for grid squares
   const [squares, setSquares] = useState(createEmptyGrid(PITCH_COLS, PITCH_ROWS));
+
+  // Drag and drop state
+  const [draggedPlayer, setDraggedPlayer] = useState(null);
+  const [draggedFrom, setDraggedFrom] = useState(null);
   
   // State for team selection and rosters
   const [selectedTeam, setSelectedTeam] = useState(TEAMS[0]);
@@ -707,6 +711,37 @@ const Pitch = () => {
                   );
                 }
 
+                // Drag and drop event handlers
+                const handleDragStart = () => {
+                  if (square) {
+                    setDraggedPlayer(square);
+                    setDraggedFrom({ row, col });
+                  }
+                };
+                const handleDragOver = (e) => {
+                  e.preventDefault();
+                };
+                const handleDrop = () => {
+                  // Tillåt bara flytt till tom ruta
+                  if (
+                    draggedPlayer &&
+                    (row !== draggedFrom?.row || col !== draggedFrom?.col) &&
+                    !squares[row * PITCH_COLS + col]
+                  ) {
+                    // Flytta spelaren
+                    const newSquares = [...squares];
+                    newSquares[draggedFrom.row * PITCH_COLS + draggedFrom.col] = null;
+                    newSquares[row * PITCH_COLS + col] = draggedPlayer;
+                    setSquares(newSquares);
+                    setDraggedPlayer(null);
+                    setDraggedFrom(null);
+                  }
+                };
+                const handleDragEnd = () => {
+                  setDraggedPlayer(null);
+                  setDraggedFrom(null);
+                };
+
                 const gridItem = (
                   <GridItem
                     key={index}
@@ -723,6 +758,11 @@ const Pitch = () => {
                     fontWeight="bold"
                     transition="background 0.2s"
                     position="relative"
+                    draggable={!!square}
+                    onDragStart={handleDragStart}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    onDragEnd={handleDragEnd}
                   >
                     {square ? square.number : ''}
                   </GridItem>

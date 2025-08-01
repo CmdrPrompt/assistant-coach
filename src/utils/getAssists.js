@@ -2,6 +2,7 @@
 
 import { getAdjacentPositions } from '@/utils/getAdjacentPositions';
 import { isAdjacentToOpponent } from '@/utils/isAdjacentToOpponent';
+import { Player } from '@/models/Player';
 
 /**
  * Calculates the number of assisting players for a block or foul action.
@@ -47,7 +48,7 @@ export function getAssists(grid, targetPosition, blockerPosition, team) {
 
 function canAssist(player, grid, pos, team, targetPosition) {
   // Om spelaren har Guard får hen alltid assistera
-  if (player.hasSkill && player.hasSkill('Guard')) {
+  if (Player.isGuard(player)) {
     return true;
   }
   // Annars: kontrollera om hen är markerad av motståndare

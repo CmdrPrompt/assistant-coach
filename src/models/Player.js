@@ -9,6 +9,14 @@
  */
 export class Player {
   /**
+   * Checks if a player is a Guard (for assist logic).
+   * @param {Player} player
+   * @returns {boolean}
+   */
+  static isGuard(player) {
+    return player && typeof player.hasSkill === 'function' && player.hasSkill('Guard');
+  }
+  /**
    * @param {object} props - The properties for the player.
    * @param {number} props.id - The unique identifier for the player.
    * @param {string} props.name - The name of the player.
