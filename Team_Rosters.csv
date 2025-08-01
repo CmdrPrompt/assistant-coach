@@ -1,0 +1,191 @@
+ Team Roster	Max players	Position	Cost	MA	ST	AG	PA	AV	Skills	Normal	Double	Tier	Re Roll	Apothecary	Special Rules
+Amazon	16	Eagle Warrior Linemen	50000	6	3	3	4	8	Dodge	G	AS	1	60000	Yes	Lustrian Superleague
+Amazon	2	Python Warrior Thrower	80000	6	3	3	3	8	Dodge, On the Ball, Pass, Safe Pass	GP	AS				
+Amazon	2	Jaguar Warrior Blocker	110000	6	4	3	5	8	Dodge, Defensive	GS	A				
+Amazon	2	Piranha Warrior Blitzer	90000	7	3	3	5	9	Dodge, Hit and Run, Jump Up	AG	S				
+															
+Black Orc	16	Goblin Bruiser	45000	6	2	3	4	8	Dodge, Right Stuff, Stunty, Thick Skull	A	GPS	2	60000	Yes	Badlands Brawl, Bribery and Corruption
+Black Orc	6	Brawler	90000	4	4	4	5	10	Brawler, Grab	GS	AP				
+Black Orc	1	Trained Troll	115000	4	5	5	5	10	Always Hungry, Loner (3+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	S	GAP				
+															
+Chaos Chosen	16	Beastman Runner Linemen	60000	6	3	3	4	9	Horns	GMS	AP	2	60000	Yes	Favoured of...
+Chaos Chosen	4	Blocker	100000	5	4	3	5	10		GMS	A				
+Chaos Chosen	1	Chaos Troll	115000	4	5	5	5	10	Always Hungry, Loner (4+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	MS	GA				
+Chaos Chosen	1	Chaos Ogre	140000	5	5	4	5	10	Bone Head, Loner (4+), Mighty Blow (+1), Thick Skull, Throw Team-Mate	MS	GA				
+Chaos Chosen	1	Minotaur	150000	5	5	4	-	9	Loner (4+), Frenzy, Horns, Mighty Blow (+1), Thick Skull, Unchannelled Fury	MS	GA				
+															
+Chaos Renegade	12	Renegade Human Lineman	50000	6	3	3	4	9		GM	AS	2	70000	Yes	Favoured Of...
+Chaos Renegade	1	Renegade Human Thrower	75000	6	3	3	3	9	Animosity (all team-mates), Pass, Safe Pair of Hands	GMP	AS				
+Chaos Renegade	1	Renegade Goblin	40000	6	2	3	4	8	Animosity (all team-mates), Dodge, Right Stuff, Stunty	AM	GP				
+Chaos Renegade	1	Renegade Orc	50000	5	3	3	5	10	Animosity (all team-mates)	GM	AS				
+Chaos Renegade	1	Renegade Skaven	50000	7	3	3	4	8	Animosity (all team-mates)	GM	AS				
+Chaos Renegade	1	Renegade Dark Elf	75000	6	3	2	3	9	Animosity (all team-mates)	GAM	PS				
+Chaos Renegade	1	Renegade Troll	115000	4	5	5	5	10	Always Hungry, Loner (4+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	S	GAM				
+Chaos Renegade	1	Renegade Ogre	140000	5	5	4	5	10	Bone Head, Loner (4+), Mighty Blow (+1), Thick Skull, Throw Team-Mate	S	GAM				
+Chaos Renegade	1	Renegade Minotaur	150000	5	5	4	-	9	Loner (4+), Frenzy, Horns, Mighty Blow (+1), Thick Skull, Unchannelled Fury	S	GAM				
+Chaos Renegade	1	Renegade Rat Ogre	150000	6	5	4	-	9	Animal Savagery, Frenzy, Loner (4+), Mighty Blow (+1), Prehensile Tail	S	GAM				
+															
+Dark Elf	12	Lineman	70000	6	3	2	4	9		GA	S	1	50000	Yes	Elven Kingdoms League
+Dark Elf	2	Runner	80000	7	3	2	3	8	Dump-Off	GAP	S				
+Dark Elf	4	Blitzer	100000	7	3	2	4	9	Block	GA	PS				
+Dark Elf	2	Assassin	85000	7	3	2	5	8	Shadowing, Stab	GA	PS				
+Dark Elf	2	Witch Elf	110000	7	3	2	5	8	Dodge, Frenzy, Jump Up	GA	PS				
+															
+Dwarf	12	Blocker Lineman	70000	4	3	4	5	10	Block, Tackle, Thick Skull	GS	A	1	50000	Yes	Old World Classic, Worlds Edge Super League
+Dwarf	2	Runner	85000	6	3	3	4	9	Sure Hands, Thick Skull	GP	A				
+Dwarf	2	Blitzer	80000	5	3	3	4	10	Block, Thick Skull	GS	AP				
+Dwarf	2	Troll Slayer	95000	5	3	4	-	9	Block, Dauntless, Frenzy, Thick Skull	GS	A				
+Dwarf	1	Deathroller	170000	4	7	5	-	11	Break Tackle, Dirty Player (+2), Juggernaut, Loner (5+), Mighty Blow (+1), No Hands, Secret Weapon, Stand Firm	S	GA				
+															
+Elven Union	16	Lineman	60000	6	3	2	4	8		GA	S	2	50000	Yes	Elven Kingdoms League
+Elven Union	2	Thrower	75000	6	3	2	2	8	Pass	GAP	S				
+Elven Union	4	Catcher	100000	8	3	2	4	8	Catch, Nerves of Steel	GA	S				
+Elven Union	2	Blitzer	115000	7	3	2	3	9	Block, Side Step	GA	S				
+															
+Gnome	12	Linemen	40000	5	2	3	4	7	Jump Up, Right Stuff, Stunty, Wrestle			3	60000	Yes	"	Halfling Thimble Cup, Old World Classic"
+Gnome	2	Illusionist	50000	5	2	3	3	7	Jump Up, Stunty, Trickster, Wrestle						
+Gnome	2	Woodland Fox	50000	7	2	2	-	6	Dodge, My Ball, SideStep, Stunty						
+Gnome	2	Beastmaster	55000	5	2	3	4	8	Guard, Jump Up, Stunty, Wrestle						
+Gnome	2	Altern Forest Treeman	120000	2	6	5	5	11	Mighty Blow (+1), Stand Firm, Strong Arm, Take Root, Thick Skull, Throw Team Mate, Timmm-ber!						
+															
+Goblin	16	Lineman	40000	6	2	3	4	8	Dodge, right Stuff, Stunty	A	GPS	3	60000	Yes	Badlands Brawl, Bribery and Corruption, Underworld Challenge
+Goblin	1	Bomma	45000	6	2	3	4	8	Bombardier, Dodge, Secret Weapon, Stunty	A	GPS				
+Goblin	1	Looney	40000	6	2	3	-	8	Chainsaw, Secret Weapon, Stunty	A	GS				
+Goblin	1	Fanatic	70000	3	7	3	-	8	Ball & Chain, No Hands, Secret Weapon, Stunty	S	A				
+Goblin	1	Pogoer	75000	7	2	3	5	8	Dodge, Pogo Stick, Stunty	A	GPS				
+Goblin	1	Ooligan	65000	6	2	3	6	8	Dirty Player (+1), Disturbing Presence, Dodge, Right Stuff, Stunty	A	GPS				
+Goblin	1	Doom Diver	60000	6	2	3	6	8	Right Stuff, Stunty, Swoop	A	GS				
+Goblin	2	Trained Troll	115000	4	5	5	5	10	Always Hungry, Loner (3+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	S	GAP				
+															
+Halfling	16	Hopeful Lineman	30000	5	2	3	4	7	Dodge, Right Stuff, Stunty	A	GS	3	60000	Yes	Halfling Thimble Cup, Old World Classic
+Halfling	2	Hefty	50000	5	2	3	3	8	Dodge, Fend, Stunty	AP	GS				
+Halfling	2	Catcher	55000	5	2	3	5	7	Catch, Dodge, Right Stuff, Sprint, Stunty	A	GS				
+Halfling	2	Altern Forest Treeman	120000	2	6	5	5	11	Mighty Blow (+1), Stand Firm, Strong Arm, Take Root, Thick Skull, Throw Team-Mate, Timmm-ber!	S	GAP				
+															
+Human	16	Lineman	50000	6	3	3	4	9		G	AS	2	50000	Yes	Old World Classic
+Human	2	Thrower	80000	6	3	3	2	9	Pass, Sure Hands	GP	AS				
+Human	4	Catcher	65000	8	2	3	5	8	Catch, Dodge	GA	PS				
+Human	4	Blitzer	85000	7	3	3	4	9	Block	GS	AP				
+Human	3	Halfling Hopeful	30000	5	2	3	4	7	Dodge, Right Stuff, Stunty	A	GS				
+Human	1	Ogre	140000	5	5	4	5	10	Bone Head, Loner (4+), Mighty Blow (+1), Thick Skull, Throw Team-Mate	S	GA				
+															
+Imperial Nobility	12	Retainer Lineman	45000	6	3	4	4	8	Fend	G	AS	2	70000	Yes	Old World Classic
+Imperial Nobility	2	Thrower	75000	6	3	3	3	9	Pass, running Pass	GP	AS				
+Imperial Nobility	2	Blitzer	105000	7	3	3	4	9	Block, Catch	GA	PS				
+Imperial Nobility	4	Bodyguard	90000	6	3	3	5	9	Stand Firm, Wrestle	GS	A				
+Imperial Nobility	1	Ogre	140000	5	5	4	5	10	Bone Head, Loner (4+), Mighty Blow (+1), Thick Skull, Throw Team-Mate	S	GA				
+															
+Khorn	16	Bloodborne Marauder Lineman	50000	6	3	3	4	8	Frenzy	GM	AS	2	60000	Yes	Favoured of Khorne
+Khorn	4	Khorngors	70000	6	3	3	4	9	Horns, Juggernaut	GMS	AP				
+Khorn	4	Bloodseekers	110000	5	4	4	6	10	Frenzy	GMS	A				
+Khorn	1	Bloodspawn	160000	5	5	4	-	9	Claws, Frenzy, Loner (4+), Mighty Blow (1+), Unchannelled Fury	MS	AG				
+															
+															
+Lizardmen	12	Skink Runner Lineman	60000	8	2	3	4	8	Dodge, Stunty	A	GPS	1	70000	Yes	Lustrian Superleague
+Lizardmen	2	Chameleon Skink	70000	7	2	3	3	8	Dodge, On The Ball, Shadowing, Stunty	A	GPS				
+Lizardmen	6	Saurus Blocker	85000	6	4	5	6	10		GS	A				
+Lizardmen	1	Kroxigor	140000	6	5	5	-	10	Bone Head, Loner (4+), Mighty Blow (+1), Prehensile Tail, Thick Skull	S	GA				
+															
+Necromantic	16	Zombie Lineman	40000	4	3	4	-	9	Regeneration	G	A	1	70000	No	Masters of Undeath, Sylvanian Spotlight
+Necromantic	2	Wraith	75000	7	3	3	-	8	Block, Foul Appearance, No Hands, Regeneration, Side Step	GS	A				
+Necromantic	2	Ghoul Runner	95000	6	3	3	4	9	Dodge	GA					
+Necromantic	2	Werewolf	125000	8	3	3	4	9	Claws, Frenzy, Regeneration	GA	PS				
+Necromantic	2	Flesh Golem	115000	4	4	4	-	10	Regeneration, Stand Firm, Thick Skull	GS	A				
+															
+Norse	16	Raider Lineman	50000	6	3	3	4	8	Block, Drunkard, Thick Skull	G	APS	1	60000	YES	Favoured of...(Choose either: Chaos Undivided, or Khorne, Old World Classic
+Norse	2	Beer Boar	20,000	5	1	3	-	6	Dodge, No Hands, Pick-me-up, Stunty, Titchy	-	A				
+Norse	2	Berserker	90000	6	3	3	5	8	Block, Frenzy, Jump Up	GS	AP				
+Norse	2	Valkyrie	95,000	7	3	3	3	8	Catch, Dauntless, Pass, Strip Ball	AGP	S				
+Norse	2	Ulfwerener	105000	6	4	4	-	9	Frenzy	GS	AS				
+Norse	1	Yhetee	140000	5	5	5	-	9	Claw, Disturbing Presence, Frenzy, Loner (4+), Unchanneled Fury	S	AG				
+															
+Nurgle	12	Rotter	35000	5	3	4	6	9	Decay, Plague Ridden	GM	AS	2	70000	NO	Favoured of Nurgle
+Nurgle	4	Pestigor	75,000	6	3	3	4	9	Horns, Plague Ridden, Regeneration	GMS	AP				
+Nurgle	4	Bloater	115000	4	4	4	6	10	Disturbing Presence, Foul Appearance, Plague Ridden, Regeneration	GMS	A				
+Nurgle	1	Rotspawn	140,000	4	5	5	-	10	Disturbing Presence, Foul Appearance, Loner (4+), Mighty Blow (+1), Plague Ridden, Really Stupid, Regeneration, Tentacles	S	AGM				
+															
+Ogre	16	Gnoblar Lineman	15000	5	1	3	5	6	Dodge, Right Stuff, Side Step, Stunty, Titchy	A	G	3	70000	Yes	Badlands Brawl, Low Cost Linemen, Old World Classic
+Ogre	1	Runt Punter	145000	5	5	4	4	10	Bone Head, Kick Team-Mate, Mighty Blow (+1), Thick Skull	PS	GA				
+Ogre	5	Blocker	140000	5	5	4	5	10	Bone Head, Throw Team-Mate, Mighty Blow (+1), Thick Skull	S	GAP				
+															
+Old World Alliance	12	Human Lineman	50000	6	3	3	4	9		G	AS	2	70000	Yes	Old World Classic
+Old World Alliance	1	Human Thrower	80000	6	3	3	3	9	Animosity (all Dwarf and Halfling team-mates), Pass, Sure Hands	GP	AS				
+Old World Alliance	1	Human Catcher	65000	8	2	3	5	8	Animosity (all Dwarf and Halfling team-mates, Catch, Dodge	GA	S				
+Old World Alliance	1	Human Blitzer	90000	7	3	3	4	9	Animosity (all Dwarf and Halfling team-mates), Block	GS	A				
+Old World Alliance	2	Dwarf Blocker	75000	4	3	4	5	10	Arm Bar, Brawler, Loner (3+), Thick Skull	GS	A				
+Old World Alliance	1	Dwarf Runner	85000	6	3	3	4	9	Loner (3+), Sure Hands, Thick Skull	GP	AS				
+Old World Alliance	1	Dwarf Blitzer	80000	5	3	3	4	10	Block, Loner (3+), Thick Skull	GS	A				
+Old World Alliance	1	Dwarf Troll Slayer	95000	5	3	4	-	9	Block, Dauntless, Frenzy, Loner (3+), Thick Skull	GS	A				
+Old World Alliance	2	Halfling Hopeful	30000	5	2	3	4	7	Animosity (all Dwarf and Halfling team-mates), Dodge, Right Stuff, Stunty	A	GS				
+Old World Alliance	1	Ogre	140000	5	5	4	5	10	Bone Head, Loner (4+), Throw Team-Mate, Mighty Blow (+1), Thick Skull	S	GA				
+Old World Alliance	1	Altern Forest Treeman	120000	2	6	5	5	11	Loner (4+), Mighty Blow (+1), Stand Firm, Strong Arm, Take Root, Thick Skull, Throw Team-Mate, Timmm-ber!	S	GAP				
+															
+Orc	16	Lineman	50000	5	3	3	4	10	Animosity (Orc Linemen)	G	AS	2	60000	Yes	Badlands Brawl
+Orc	2	Thrower	65000	5	3	3	3	9	Animosity (al team-mates), Pass, Sure Hands	GP	AS				
+Orc	4	Blitzer	80000	6	3	3	4	10	Animosity (all team-mates), Block	GS	AP				
+Orc	4	Big-Un Blocker	90000	5	4	4	-	10	Animosity (Big Un Blockers)	GS	A				
+Orc	4	Goblin	40000	6	2	3	4	8	Dodge, Right Stuff, Stunty	A	GS				
+Orc	1	Untrained Troll	115000	4	5	5	5	10	Always Hungry, Loner (4+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	S	GAP				
+															
+Undead	12	Skeleton Lineman	40000	5	3	4	6	8	Regeneration, Thick Skull	G	AS	1	70000	No	Masters of Undeath, Sylvanian Spotlight
+Undead	12	Zombie Lineman	40000	4	3	4	-	9	Regeneration	G	AS				
+Undead	4	Ghoul Runner	75000	7	3	3	4	8	Dodge	GA	PS				
+Undead	2	Wight Blitzer	90000	6	3	3	5	9	Block, Regeneration	GS	AP				
+Undead	2	Mummy	125000	3	5	5	-	10	Mighty Blow (+1), Regeneration	S	GA				
+															
+Skaven	16	Clanrat Lineman	50000	7	3	3	4	8		G	AMS	1	50000	Yes	Underworld Challenge
+Skaven	2	Thrower	85000	7	3	3	2	8	Pass, Sure Hands	GP	AMS				
+Skaven	4	Gutter Runner	85000	9	2	2	4	8	Dodge	GA	MPS				
+Skaven	2	Blitzer	90000	7	3	3	5	9	Block	GS	AMP				
+Skaven	1	Rat Ogre	150000	6	5	4	-	9	Animal Savagery, Frenzy, Loner (4+), Mighty Blow (+1), Prehensile Tail	S	GAM				
+															
+Snotling	16	Lineman	15000	5	1	3	5	6	Dodge, right Stuff, Side Step, Stunty, Swarming, Titchy	A	G	3	60000	Yes	Bribery and Corruption, Low Cost Linemen, Underworld Challenge
+Snotling	2	Fungus Flinga	30000	5	1	3	4	6	Bombardier, Dodge, Right Stuff, Secret Weapon, Side Step, Stunty	AP	G				
+Snotling	2	Fun-Hopper	20000	6	1	3	5	6	Dodge, Pogo Stick, Right Stuff, Side Step, Stunty	A	G				
+Snotling	2	Stilty Runna	20000	6	1	3	5	6	Dodge, Right Stuff, Side Step, Sprint, Stunty	A	G				
+Snotling	2	Pump Wagon	105000	4	5	5	-	9	Dirty Player (+1), Juggernaut, Mighty Blow (+1), Really Stupid, Secret Weapon, Stand Firm	S	GA				
+Snotling	2	Trained Troll	115000	4	5	5	5	10	Always Hungry, Loner (3+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	S	GAP				
+															
+Underworld	12	Goblin Lineman	40000	6	2	3	4	8	Dodge, Right Stuff, Stunty	AM	GS	1	70000	Yes	Bribery and Corruption, Underworld Challenge
+Underworld	6	Snotling	15000	5	1	3	5	6	Dodge, Right Stuff, Side Step, Stunty, Swarming, Titchy	AM	G				
+Underworld	3	Skaven Clanrat	50000	7	3	3	4	8	Animosity (Goblin Linemen)	GM	AS				
+Underworld	1	Skaven Thrower	85000	7	3	3	2	8	Animosity (Goblin Linemen), Pass, Sure Hands	GMP	AS				
+Underworld	1	Gutter Runner	85000	9	2	2	4	8	Animosity (Goblin Linemen), Dodge	GAM	PS				
+Underworld	1	Skaven Blitzer	90000	7	3	3	5	9	Animosity (Goblin Linemen), Block	GMS	AP				
+Underworld	1	Troll	115000	4	5	5	5	10	Always Hungry, Loner (4+), Mighty Blow (+1), Projectile Vomit, Really Stupid, Regeneration, Throw Team-Mate	MS	GAP				
+Underworld	1	Rat Ogre	150000	6	5	4	-	9	Animal Savagery, Frenzy, Loner (4+), Mighty Blow (+1), Prehensile Tail	MS	GA				
+															
+Vampire	16	Thrall Lineman	40000	6	3	3	4	8		G	AS	2	60000	YES	Sylvanian Spotlight, Vampire Lord
+Vampire	2	Runner	100000	8	3	2	4	8	Bloodlust (2+), Hypnotic Gaze, Regeneration	AG	PS				
+Vampire	2	Thrower	110000	6	4	2	2	9	Bloodlust (2+), Hypnotic Gaze, Pass, Regeneration	AGP	S				
+Vampire	2	Blitzer	110000	6	4	2	5	9	Bloodlust (3+), Hypnotic Gaze, Juggernaut, Regeneration	AGS	-				
+Vampire	1	Vargheist	150000	5	5	4	-	10	Bloodlust (3+), Claws, Frenzy, Loner (4+), Regeneration	S	AG				
+															
+Wood Elf	12	Linemen	70000	7	3	2	4	8		GA	S	1	50000	Yes	Elven Kingdoms League
+Wood Elf	2	Thrower	95000	7	3	2	2	8	Pass	GAP	S				
+Wood Elf	4	Catcher	90000	8	2	2	4	8	Catch, dodge	GA	PS				
+Wood Elf	2	Wardancer	125000	8	3	2	4	8	Block, Dodge, Leap	GA	PS				
+Wood Elf	1	Loren Forest Treeman	120000	2	6	5	5	11	Loner (4+), Mighty Blow (+1), Stand Firm, Strong Arm, Take Root, Thick Skull, Throw Team-Mate	S	GA				
+															
+Chaos Dwarf*	16	Hobgoblin Lineman	40000	6	3	3	4	8		G	APS	1	70000	Yes	Badlands Brawl, Favoured of..., World's Edge Superleague
+Chaos Dwarf*	6	Blocker	70000	4	3	4	6	10	Block, Tackle, Thick Skull	GS	AM				
+Chaos Dwarf*	2	Bull Centaur	130000	6	4	4	6	10	Sprint, Sure Feet, Thick Skull	GS	A				
+Chaos Dwarf*	1	Enslaved Minotaur	150000	5	5	4	-	9	Animal Savagery, Loner (4+), Frenzy, Horns, Mighty Blow (+1), Thick Skull	S	GAM				
+															
+High Elf*	16	Lineman	70000	6	3	2	4	9		AG	PS	1	50000	YES	Elven Kingdoms
+High Elf*	2	Thrower	100000	6	3	2	2	9	Cloud Burster, Pass, Safe Pass	AGP	S				
+High Elf*	4	Catcher	90000	8	3	2	5	8	Catch	AG	S				
+High Elf*	2	Blitzer	100000	7	3	2	4	9	Block	AG	S				
+															
+Tomb King*	16	Skeleton Lineman	40000	5	3	4	6	8	Regeneration, Thick Skull	G	AS	2	70000	NO	Sylvanian Spotlight
+Tomb King*	2	Anointed Thrower	70000	6	3	4	3	8	Pass, Regeneration, Sure Hands, Thick Skull	GP	AS				
+Tomb King*	2	Anointed Blitzer	90000	6	3	4	6	9	Block, Regeneration, Thick Skull	GS	AP				
+Tomb King*	4	Tomb Guardian	100000	4	5	5	-	10	Decay, Regeneration	S	AG				
+															
+Slann**	16	Lineman	60000	6	3	3	4	9	Leap, Very Long Legs	G	AS	N/A	50000	YES	Lustrian Superleague
+Slann**	4	Catcher	80000	7	2	2	4	8	Diving Catch, Leap, Very Long Legs	GA	SP				
+Slann**	4	Blitzer	110000	6	3	3	4	9	Diving Tackle, Jump Up, Leap, Very Long Legs	GAS	P				
+Slann**	1	Kroxigor	140000	6	5	5	-	10	Bonehead, Loner (4+), Mighty Blow (+1), Prehensile Tail, Thick Skull	S	GA				
+															
+															
+															
