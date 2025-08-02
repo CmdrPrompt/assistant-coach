@@ -1,18 +1,18 @@
 # Block Assistant
 
-🧩 *Blood Bowl Block Calculator Web App*
+*Blood Bowl Block Calculator Web App*
 
 An interactive frontend tool that calculates the number of dice rolled in blocking actions in **Blood Bowl**, based on player positions and stats.
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 This app helps Blood Bowl players quickly analyze blocking situations. It's designed to support tactical decision-making both in gameplay and practice sessions and to correctly calculate the number of dice to roll in any given situation.
 
 ---
 
-## ✨ Features
+## Features
 
 
 - ✅ **Core Simulation Engine:**
@@ -44,7 +44,7 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 ---
 
 
-## 🔜 Upcoming Features in planning
+## Upcoming Features in planning
 
 - **Skill Implementation:**
   - Only `Guard` is fully implemented for assists.
@@ -61,7 +61,7 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Component      | Technology              |
 |:---------------|:------------------------|
@@ -72,7 +72,7 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ---
 
-## 📦 Installation & Development
+## Installation & Development
 
 ### 1. Clone the Repository
 
