@@ -46,11 +46,6 @@ const Pitch = () => {
     Blue: []
   });
   
-  // Track actual team names (Imperial Guards, Wood Elves, etc.)
-  const [actualTeamNames, setActualTeamNames] = useState({
-    Red: '',
-    Blue: ''
-  });
   
   // State for player selection
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -206,225 +201,6 @@ const Pitch = () => {
     }
   };
 
-  // Generate test players for both teams based on Blood Bowl teams
-  const generateTestPlayers = () => {
-    // Clear existing rosters and placed players
-    setTeamRosters({ Red: [], Blue: [] });
-    setPlacedPlayerIds(new Set());
-    setSquares(createEmptyGrid(PITCH_COLS, PITCH_ROWS));
-    
-    // Team data based on Team_Rosters.csv with position-specific skills
-    const teamData = {
-      'Imperial Guards': {
-        positions: [
-          { 
-            name: 'Retainer Lineman', 
-            count: 6, 
-            strength: 3,
-            skills: ['fend']
-          },
-          { 
-            name: 'Thrower', 
-            count: 1, 
-            strength: 3,
-            skills: ['pass', 'running pass']
-          },
-          { 
-            name: 'Blitzer', 
-            count: 2, 
-            strength: 3,
-            skills: ['block', 'catch']
-          },
-          { 
-            name: 'Bodyguard', 
-            count: 2, 
-            strength: 3,
-            skills: ['stand firm', 'wrestle', 'guard'] // Added Guard skill
-          }
-        ]
-      },
-      'Wood Elves': {
-        positions: [
-          { 
-            name: 'Lineman', 
-            count: 6, 
-            strength: 3,
-            skills: []
-          },
-          { 
-            name: 'Thrower', 
-            count: 1, 
-            strength: 3,
-            skills: ['pass']
-          },
-          { 
-            name: 'Catcher', 
-            count: 2, 
-            strength: 2,
-            skills: ['catch', 'dodge']
-          },
-          { 
-            name: 'Wardancer', 
-            count: 2, 
-            strength: 3,
-            skills: ['block', 'dodge', 'leap', 'guard'] // Added Guard skill
-          }
-        ]
-      },
-      'Orcs': {
-        positions: [
-          { 
-            name: 'Lineman', 
-            count: 6, 
-            strength: 3,
-            skills: ['animosity']
-          },
-          { 
-            name: 'Thrower', 
-            count: 1, 
-            strength: 3,
-            skills: ['animosity', 'pass', 'sure hands']
-          },
-          { 
-            name: 'Blitzer', 
-            count: 2, 
-            strength: 3,
-            skills: ['animosity', 'block', 'guard'] // Added Guard skill
-          },
-          { 
-            name: 'Big-Un Blocker', 
-            count: 2, 
-            strength: 4,
-            skills: ['animosity', 'guard'] // Added Guard skill
-          }
-        ]
-      },
-      'Norse': {
-        positions: [
-          { 
-            name: 'Raider Lineman', 
-            count: 6, 
-            strength: 3,
-            skills: ['block', 'drunkard', 'thick skull']
-          },
-          { 
-            name: 'Valkyrie', 
-            count: 1, 
-            strength: 3,
-            skills: ['catch', 'dauntless', 'pass', 'strip ball']
-          },
-          { 
-            name: 'Berserker', 
-            count: 2, 
-            strength: 3,
-            skills: ['block', 'frenzy', 'jump up', 'guard'] // Added Guard skill
-          },
-          { 
-            name: 'Ulfwerener', 
-            count: 2, 
-            strength: 4,
-            skills: ['frenzy']
-          }
-        ]
-      }
-    };
-    
-    // Randomly select two different teams
-    const teamNames = Object.keys(teamData);
-    const redTeamIndex = Math.floor(Math.random() * teamNames.length);
-    let blueTeamIndex;
-    do {
-      blueTeamIndex = Math.floor(Math.random() * teamNames.length);
-    } while (blueTeamIndex === redTeamIndex);
-    
-    const redTeamName = teamNames[redTeamIndex];
-    const blueTeamName = teamNames[blueTeamIndex];
-    
-    // Common Anglo-Saxon names, alphabetically sorted
-    const redTeamNames = [
-      'Adam', 'Alfred', 'Arthur', 'Ashton', 'Austin',
-      'Baldwin', 'Bernard', 'Blake', 'Bradley', 'Brandon', 'Bruce'
-    ];
-    
-    const blueTeamNames = [
-      'Caleb', 'Carter', 'Charles', 'Chester', 'Christopher',
-      'Daniel', 'David', 'Derek', 'Duncan', 'Dustin', 'Dylan'
-    ];
-    
-    // Generate players for both teams
-    let newId = 1;
-    const newRosters = { Red: [], Blue: [] };
-    
-    // Create Red team
-    let nameIndex = 0;
-    teamData[redTeamName].positions.forEach(pos => {
-      for (let i = 0; i < pos.count; i++) {
-        if (nameIndex >= redTeamNames.length) break;
-        
-        // Get name from the appropriate set
-        const name = redTeamNames[nameIndex++];
-        
-        // Adjust strength slightly for variety (±1)
-        const strengthAdjustment = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
-        const strength = Math.max(2, Math.min(5, pos.strength + strengthAdjustment));
-        
-        // Use position-specific skills from team data
-        const skills = [...pos.skills];
-        
-        // Create player
-        const player = new Player({
-          id: newId++,
-          name,
-          team: 'Red',
-          position: pos.name,
-          strength,
-          skills
-        });
-        
-        newRosters.Red.push(player);
-      }
-    });
-    
-    // Create Blue team
-    nameIndex = 0;
-    teamData[blueTeamName].positions.forEach(pos => {
-      for (let i = 0; i < pos.count; i++) {
-        if (nameIndex >= blueTeamNames.length) break;
-        
-        // Get name from the appropriate set
-        const name = blueTeamNames[nameIndex++];
-        
-        // Adjust strength slightly for variety (±1)
-        const strengthAdjustment = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
-        const strength = Math.max(2, Math.min(5, pos.strength + strengthAdjustment));
-        
-        // Use position-specific skills from team data
-        const skills = [...pos.skills];
-        
-        // Create player
-        const player = new Player({
-          id: newId++,
-          name,
-          team: 'Blue',
-          position: pos.name,
-          strength,
-          skills
-        });
-        
-        newRosters.Blue.push(player);
-      }
-    });
-    
-    console.log(`Generated Red team: ${redTeamName}, Blue team: ${blueTeamName}`);
-    setTeamRosters(newRosters);
-    setNextPlayerId(newId);
-    
-    // Set the actual team names
-    setActualTeamNames({
-      Red: redTeamName,
-      Blue: blueTeamName
-    });
-  };
 
 
   return (
@@ -436,12 +212,11 @@ const Pitch = () => {
               TEAMS={TEAMS}
               selectedTeam={selectedTeam}
               setSelectedTeam={setSelectedTeam}
-              generateTestPlayers={generateTestPlayers}
               openPlayerCreator={openPlayerCreator}
             />
             <TeamRoster 
               team={selectedTeam}
-              actualTeamName={actualTeamNames[selectedTeam]}
+              // actualTeamName prop removed
               players={teamRosters[selectedTeam]}
               onSelectPlayer={handleSelectPlayer}
               placedPlayerIds={placedPlayerIds}
@@ -464,7 +239,7 @@ const Pitch = () => {
             PITCH_ROWS={PITCH_ROWS}
             blockMode={blockMode}
             blockOutcome={blockOutcome}
-            actualTeamNames={actualTeamNames}
+            // actualTeamNames prop removed
             selectedPlayer={selectedPlayer}
             handleSquareClick={handleSquareClick}
             draggedPlayer={draggedPlayer}

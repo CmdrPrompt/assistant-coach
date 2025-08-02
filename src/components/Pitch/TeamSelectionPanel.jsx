@@ -5,11 +5,10 @@ const TeamSelectionPanel = ({
   TEAMS,
   selectedTeam,
   setSelectedTeam,
-  generateTestPlayers,
   openPlayerCreator
 }) => (
   <Box mb={2}>
-    <Text fontWeight="bold" mb={1} fontSize="md">Team Selection & Test Teams</Text>
+    <Text fontWeight="bold" mb={1} fontSize="md">Team Selection</Text>
     <HStack spacing={2}>
       <Select 
         value={selectedTeam} 
@@ -19,14 +18,6 @@ const TeamSelectionPanel = ({
       >
         {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
       </Select>
-      <Button 
-        colorScheme="teal" 
-        size="sm" 
-        px={4}
-        onClick={generateTestPlayers}
-      >
-        Generate Test Teams
-      </Button>
     </HStack>
     <Button colorScheme="purple" size="sm" mt={2} onClick={openPlayerCreator}>
       Add New Player
