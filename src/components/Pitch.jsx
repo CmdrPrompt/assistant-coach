@@ -90,7 +90,7 @@ const Pitch = () => {
   } = useDisclosure();
   
   // Block action state
-  const [blockMode, setBlockMode] = useState(false);
+  const blockMode = true;
   const [blocker, setBlocker] = useState(null);
   const [target, setTarget] = useState(null);
   const [blockOutcome, setBlockOutcome] = useState(null);
@@ -143,13 +143,6 @@ const Pitch = () => {
     setSelectedPlayer(player);
   };
 
-  // Toggle block mode
-  const toggleBlockMode = () => {
-    setBlockMode(!blockMode);
-    setBlocker(null);
-    setTarget(null);
-    setBlockOutcome(null);
-  };
 
   // Calculate block outcome
   const calculateBlock = () => {
@@ -187,50 +180,10 @@ const Pitch = () => {
 
   // Handle clicking on a square
   const handleSquareClick = (index) => {
-    if (blockMode) {
-      // In block mode, handle selecting blocker and target
-      if (!squares[index]) return; // Can only select occupied squares in block mode
-      
-      const clickedSquare = { ...squares[index], index };
-      
-      if (!blocker) {
-        // First click in block mode selects the blocker
-        setBlocker(clickedSquare);
-      } else if (!target) {
-        // Second click selects the target if it's on the opposing team
-        if (clickedSquare.team === blocker.team) {
-          // Can't block your own team
-          return;
-        }
-        setTarget(clickedSquare);
-        
-      // Calculate block outcome after selecting target
-      calculateBlock();
-      
-      // Log for debugging
-      console.log('Block outcome calculated:', {
-        blocker: blocker.player.name,
-        target: clickedSquare.player.name,
-        outcome: blockOutcome
-      });
-      } else {
-        // Reset selections if both are already selected
-        setBlocker(clickedSquare);
-        setTarget(null);
-        setBlockOutcome(null);
-      }
-    } else {
-      // Normal mode - place players or view details
-      if (squares[index]) {
-        setSelectedSquarePlayer(squares[index].player);
-        onOpen();
-        return;
-      }
-      
-      // If no player is selected, do nothing
-      if (!selectedPlayer) return;
-      
-      // Place the selected player on the square
+    // If a player is selected, always allow placement
+    if (selectedPlayer) {
+      // Place the selected player on the square if it's empty
+      if (squares[index]) return;
       const newSquares = [...squares];
       newSquares[index] = { 
         team: selectedPlayer.team, 
@@ -238,12 +191,35 @@ const Pitch = () => {
         player: selectedPlayer 
       };
       setSquares(newSquares);
-      
-      // Mark the player as placed
       setPlacedPlayerIds(prev => new Set([...prev, selectedPlayer.id]));
-      
-      // Clear the selected player
       setSelectedPlayer(null);
+      return;
+    }
+
+    // If no player is selected, run block mode logic
+    if (squares[index]) {
+      const clickedSquare = { ...squares[index], index };
+      if (!blocker) {
+        setBlocker(clickedSquare);
+      } else if (!target) {
+        if (clickedSquare.team === blocker.team) {
+          return;
+        }
+        setTarget(clickedSquare);
+        calculateBlock();
+        console.log('Block outcome calculated:', {
+          blocker: blocker.player.name,
+          target: clickedSquare.player.name,
+          outcome: blockOutcome
+        });
+      } else {
+        setBlocker(clickedSquare);
+        setTarget(null);
+        setBlockOutcome(null);
+      }
+    } else {
+      // If clicking an empty square with no player selected, do nothing
+      return;
     }
   };
 
@@ -478,16 +454,31 @@ const Pitch = () => {
   return (
     <Box w="100vw" h="100vh" p={0} m={0}>
       <Flex direction={{ base: "column", lg: "row" }} align="flex-start" h="100%" w="100%" p={0} m={0}>
-        <Box flex="1" minW="260px" maxW="340px" p={2} m={0} alignSelf="flex-start">
+        <Box flex="1.2" minW="312px" maxW="408px" p={2} m={0} alignSelf="flex-start">
           <VStack spacing={2} align="stretch">
-            <Select 
-              value={selectedTeam} 
-              onChange={e => setSelectedTeam(e.target.value)} 
-              maxW="200px" 
-              mb={2}
-            >
-              {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
-            </Select>
+
+
+            <Box mb={2}>
+              <Text fontWeight="bold" mb={1} fontSize="md">Team Selection & Test Teams</Text>
+              <HStack spacing={2}>
+                <Select 
+                  value={selectedTeam} 
+                  onChange={e => setSelectedTeam(e.target.value)} 
+                  maxW="160px"
+                  size="sm"
+                >
+                  {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
+                </Select>
+                <Button 
+                  colorScheme="teal" 
+                  size="sm" 
+                  px={4}
+                  onClick={generateTestPlayers}
+                >
+                  Generate Test Teams
+                </Button>
+              </HStack>
+            </Box>
 
             <Button colorScheme="purple" size="sm" mb={2} onClick={openPlayerCreator}>
               Add New Player
@@ -505,30 +496,7 @@ const Pitch = () => {
         
         <Box flex="2" h="100%" p={0} m={0} alignSelf="flex-start">
           <VStack spacing={2} align="stretch" mb={2} h="auto">
-            <Flex justify="space-between" align="center">
-              {/* Block mode toggle */}
-              <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="block-mode" mb="0">
-                  Block Mode
-                </FormLabel>
-                <Switch 
-                  id="block-mode" 
-                  isChecked={blockMode} 
-                  onChange={toggleBlockMode} 
-                  colorScheme="purple"
-                />
-              </FormControl>
-              
-              {/* Test mode button */}
-              <Button 
-                colorScheme="teal" 
-                size="sm" 
-                onClick={generateTestPlayers}
-                ml={2}
-              >
-                Generate Test Teams
-              </Button>
-            </Flex>
+            {/* Block mode is always active. Block mode toggle removed. */}
             
             {/* Instructions based on current mode */}
             {blockMode ? (
@@ -728,6 +696,7 @@ const Pitch = () => {
                   tooltipLabel = (
                     <VStack align="start" spacing={1} p={1}>
                       <Text fontWeight="bold">{player.name}</Text>
+                      <Text>Team: {actualTeamNames[player.team] || player.team}</Text>
                       <Text>Position: {player.position || 'Unknown'}</Text>
                       <Text>Strength: {player.strength}</Text>
                       <Text>Skills: {formatSkills(player.skills)}</Text>

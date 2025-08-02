@@ -12,7 +12,7 @@ function App() {
           color="gray.700"
           textAlign="center"
         >
-          Block Assistant
+          Assistant Coach
         </Heading>
         <Pitch />
       </VStack>
