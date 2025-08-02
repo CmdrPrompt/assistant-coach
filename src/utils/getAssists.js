@@ -47,10 +47,19 @@ export function getAssists(grid, targetPosition, blockerPosition, team) {
 }
 
 function canAssist(player, grid, pos, team, targetPosition) {
-  // Om spelaren har Guard får hen alltid assistera
-  if (Player.isGuard(player)) {
+  // Förbättrad Guard-kontroll: robust mot olika format och loggar info
+  const hasGuard =
+    (typeof player.hasSkill === 'function' && player.hasSkill('guard')) ||
+    (Array.isArray(player.skills) && player.skills.map(s => s.toLowerCase()).includes('guard')) ||
+    (Player.isGuard && Player.isGuard(player));
+
+  if (hasGuard) {
+    console.log('[ASSIST] Guard-spelare:', player.name, 'kan assistera oavsett markering.', player);
     return true;
   }
-  // Annars: kontrollera om hen är markerad av motståndare
-  return !isAdjacentToOpponent(grid, pos, team, targetPosition);
+  const notEngaged = !isAdjacentToOpponent(grid, pos, team, targetPosition);
+  if (!notEngaged) {
+    console.log('[ASSIST] Spelare', player.name, 'kan INTE assistera (markerad, ingen Guard).', player);
+  }
+  return notEngaged;
 }

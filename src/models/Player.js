@@ -14,7 +14,13 @@ export class Player {
    * @returns {boolean}
    */
   static isGuard(player) {
-    return player && typeof player.hasSkill === 'function' && player.hasSkill('Guard');
+    // Case-insensitive kontroll för Guard
+    if (!player) return false;
+    if (typeof player.hasSkill === 'function' && player.hasSkill('guard')) return true;
+    if (Array.isArray(player.skills)) {
+      return player.skills.some(skill => skill.toLowerCase() === 'guard');
+    }
+    return false;
   }
   /**
    * @param {object} props - The properties for the player.
@@ -49,7 +55,9 @@ export class Player {
    * @returns {boolean} True if the player has the skill, otherwise false.
    */
   hasSkill(skillName) {
-    return this.skills.includes(skillName);
+    // Case-insensitive kontroll för skills
+    if (!skillName) return false;
+    return this.skills.some(skill => skill.toLowerCase() === skillName.toLowerCase());
   }
 
   /**

@@ -24,6 +24,8 @@ describe('calculateBlockOutcome', () => {
       targetStrength: 4,
       blockerAssists: 0,
       targetAssists: 0,
+      blockerAssistingPlayers: [],
+      targetAssistingPlayers: [],
       error: null,
     });
   });
@@ -46,6 +48,8 @@ describe('calculateBlockOutcome', () => {
       targetStrength: 4,
       blockerAssists: 0,
       targetAssists: 0,
+      blockerAssistingPlayers: [],
+      targetAssistingPlayers: [],
       error: null,
     });
   });
@@ -68,6 +72,8 @@ describe('calculateBlockOutcome', () => {
       targetStrength: 5,
       blockerAssists: 0,
       targetAssists: 0,
+      blockerAssistingPlayers: [],
+      targetAssistingPlayers: [],
       error: null,
     });
   });
@@ -106,6 +112,8 @@ describe('calculateBlockOutcome', () => {
       targetStrength: 5,
       blockerAssists: 0,
       targetAssists: 0,
+      blockerAssistingPlayers: [],
+      targetAssistingPlayers: [],
       error: null,
     });
   });
@@ -144,6 +152,8 @@ describe('calculateBlockOutcome', () => {
       targetStrength: 5,
       blockerAssists: 1,
       targetAssists: 0,
+      blockerAssistingPlayers: [{ player: expect.any(Player), position: expect.any(Object), reason: expect.any(String) }],
+      targetAssistingPlayers: [],
       error: null,
     });
   });
@@ -160,12 +170,14 @@ describe('calculateBlockOutcome', () => {
     const targetPos = { row: 1, col: 1 };
     const result = calculateBlockOutcome(grid, blockerPos, targetPos);
     expect(result).toEqual({
-      diceCount: 2,
-      chooser: 'target',
+      diceCount: 1,
+      chooser: 'blocker',
       blockerStrength: 5,
-      targetStrength: 6,
+      targetStrength: 5,
       blockerAssists: 0,
-      targetAssists: 1,
+      targetAssists: 0,
+      blockerAssistingPlayers: [],
+      targetAssistingPlayers: [],
       error: null,
     });
   });

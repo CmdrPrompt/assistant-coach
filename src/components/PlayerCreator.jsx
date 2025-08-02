@@ -47,12 +47,20 @@ const AVAILABLE_SKILLS = [
  * @param {function} props.onAddPlayer - Callback function when a player is added
  * @param {number} props.nextId - The next available player ID
  */
-const PlayerCreator = ({ team, onAddPlayer, nextId }) => {
+const PlayerCreator = ({ team, onAddPlayer, nextId, autoFocusName }) => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('Lineman');
   const [strength, setStrength] = useState(3);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const toast = useToast();
+  // Support autoFocusName prop
+  const inputRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (autoFocusName && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [autoFocusName]);
 
   const handleAddPlayer = () => {
     if (!name.trim()) {
@@ -111,6 +119,7 @@ const PlayerCreator = ({ team, onAddPlayer, nextId }) => {
         <FormControl isRequired>
           <FormLabel>Player Name</FormLabel>
           <Input 
+            ref={inputRef}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter player name"

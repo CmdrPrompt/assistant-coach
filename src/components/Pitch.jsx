@@ -81,6 +81,13 @@ const Pitch = () => {
   // Modal for player details
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedSquarePlayer, setSelectedSquarePlayer] = useState(null);
+
+  // Modal for PlayerCreator
+  const {
+    isOpen: isPlayerCreatorOpen,
+    onOpen: openPlayerCreator,
+    onClose: closePlayerCreator
+  } = useDisclosure();
   
   // Block action state
   const [blockMode, setBlockMode] = useState(false);
@@ -469,10 +476,10 @@ const Pitch = () => {
   };
 
   return (
-    <Box>
-      <Flex direction={{ base: "column", lg: "row" }} spacing={4} mb={4}>
-        <Box flex="1" mr={{ base: 0, lg: 4 }} mb={{ base: 4, lg: 0 }}>
-          <VStack spacing={4} align="stretch">
+    <Box w="100vw" h="100vh" p={0} m={0}>
+      <Flex direction={{ base: "column", lg: "row" }} align="flex-start" h="100%" w="100%" p={0} m={0}>
+        <Box flex="1" minW="260px" maxW="340px" p={2} m={0} alignSelf="flex-start">
+          <VStack spacing={2} align="stretch">
             <Select 
               value={selectedTeam} 
               onChange={e => setSelectedTeam(e.target.value)} 
@@ -481,7 +488,11 @@ const Pitch = () => {
             >
               {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
             </Select>
-            
+
+            <Button colorScheme="purple" size="sm" mb={2} onClick={openPlayerCreator}>
+              Add New Player
+            </Button>
+
             <TeamRoster 
               team={selectedTeam}
               actualTeamName={actualTeamNames[selectedTeam]}
@@ -489,17 +500,11 @@ const Pitch = () => {
               onSelectPlayer={handleSelectPlayer}
               placedPlayerIds={placedPlayerIds}
             />
-            
-            <PlayerCreator 
-              team={selectedTeam}
-              onAddPlayer={handleAddPlayer}
-              nextId={nextPlayerId}
-            />
           </VStack>
         </Box>
         
-        <Box flex="2">
-          <VStack spacing={3} align="stretch" mb={4}>
+        <Box flex="2" h="100%" p={0} m={0} alignSelf="flex-start">
+          <VStack spacing={2} align="stretch" mb={2} h="auto">
             <Flex justify="space-between" align="center">
               {/* Block mode toggle */}
               <FormControl display="flex" alignItems="center">
@@ -539,8 +544,8 @@ const Pitch = () => {
                   </Text>
                 )}
                 {blocker && target && blockOutcome && !blockOutcome.error && (
-                  <Alert status="info" borderRadius="md">
-                    <AlertIcon />
+                  <Alert status="warning" borderRadius="md" bg="#FFF9DB" color="#7C6F00">
+                    <AlertIcon color="#FFD600" />
                     <Box>
                       <AlertTitle>Block Result</AlertTitle>
                       <AlertDescription>
@@ -559,13 +564,22 @@ const Pitch = () => {
                         </Text>
                         {blockOutcome.blockerAssistingPlayers && Array.isArray(blockOutcome.blockerAssistingPlayers) && blockOutcome.blockerAssistingPlayers.length > 0 && (
                           <Text fontSize="sm" ml={4} color="gray.600">
-                            Assists from: {blockOutcome.blockerAssistingPlayers.map(ap => 
-                              ap && ap.player && (
-                                <Badge key={ap.player.id || Math.random()} colorScheme={blocker.team === 'Red' ? 'red' : 'blue'} mr={1}>
-                                  {ap.player.name}
-                                </Badge>
-                              )
-                            )}
+                            {blockOutcome.blockerAssistingPlayers.length === 1 ? 'Assist from:' : 'Assists from:'} {blockOutcome.blockerAssistingPlayers.map(ap => {
+                              if (!ap || !ap.player) return null;
+                              const showGuard = ap.reason === 'Guard skill';
+                              return (
+                                <span key={ap.player.id || Math.random()} style={{ marginRight: 8 }}>
+                                  <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'} mr={1}>
+                                    {ap.player.name}
+                                  </Badge>
+                                  {showGuard && (
+                                    <span style={{ fontSize: '0.85em', color: '#888', marginLeft: 2 }}>
+                                      [Guard]
+                                    </span>
+                                  )}
+                                </span>
+                              );
+                            })}
                           </Text>
                         )}
                         <Text>
@@ -574,13 +588,22 @@ const Pitch = () => {
                         </Text>
                         {blockOutcome.targetAssistingPlayers && Array.isArray(blockOutcome.targetAssistingPlayers) && blockOutcome.targetAssistingPlayers.length > 0 && (
                           <Text fontSize="sm" ml={4} color="gray.600">
-                            Assists from: {blockOutcome.targetAssistingPlayers.map(ap => 
-                              ap && ap.player && (
-                                <Badge key={ap.player.id || Math.random()} colorScheme={target.team === 'Red' ? 'red' : 'blue'} mr={1}>
-                                  {ap.player.name}
-                                </Badge>
-                              )
-                            )}
+                            {blockOutcome.targetAssistingPlayers.length === 1 ? 'Assist from:' : 'Assists from:'} {blockOutcome.targetAssistingPlayers.map(ap => {
+                              if (!ap || !ap.player) return null;
+                              const showGuard = ap.reason === 'Guard skill';
+                              return (
+                                <span key={ap.player.id || Math.random()} style={{ marginRight: 8 }}>
+                                  <Badge colorScheme={target.team === 'Red' ? 'red' : 'blue'} mr={1}>
+                                    {ap.player.name}
+                                  </Badge>
+                                  {showGuard && (
+                                    <span style={{ fontSize: '0.85em', color: '#888', marginLeft: 2 }}>
+                                      [Guard]
+                                    </span>
+                                  )}
+                                </span>
+                              );
+                            })}
                           </Text>
                         )}
                         <Text fontWeight="bold" mt={2}>
@@ -617,13 +640,17 @@ const Pitch = () => {
           
           <Grid
             w="100%"
+            h={{ base: "60vw", md: "80vh" }}
+            maxH="80vh"
             aspectRatio={`${PITCH_COLS}/${PITCH_ROWS}`}
             templateColumns={`repeat(${PITCH_COLS}, 1fr)`}
             templateRows={`repeat(${PITCH_ROWS}, 1fr)`}
-            gap="2px"
+            gap="1px"
             bg="gray.400"
-            border="4px solid"
+            border="2px solid"
             borderColor="gray.400"
+            m={0}
+            alignSelf="flex-start"
           >
             {squares.map((square, index) => {
                 const row = Math.floor(index / PITCH_COLS);
@@ -815,6 +842,26 @@ const Pitch = () => {
                 </Box>
               </VStack>
             )}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      {/* Modal for PlayerCreator */}
+      <Modal isOpen={isPlayerCreatorOpen} onClose={closePlayerCreator}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add New Player</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <PlayerCreator 
+              team={selectedTeam}
+              onAddPlayer={player => {
+                handleAddPlayer(player);
+                closePlayerCreator();
+              }}
+              nextId={nextPlayerId}
+              autoFocusName={true}
+            />
           </ModalBody>
         </ModalContent>
       </Modal>
