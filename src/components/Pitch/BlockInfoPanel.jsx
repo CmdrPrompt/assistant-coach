@@ -128,14 +128,14 @@ const BlockInfoPanel = ({
                   const redOnPitch = squares && squares.some(sq => sq && sq.player && sq.player.team === 'Red');
                   const blueOnPitch = squares && squares.some(sq => sq && sq.player && sq.player.team === 'Blue');
                   if (redOnPitch && blueOnPitch) {
-                    return 'Välj en Blocker genom att klicka på en spelare på planen.';
+                    return 'Select a Blocker by clicking a player on the pitch.';
                   } else if (teamRosters && teamRosters.Red && teamRosters.Blue && teamRosters.Red.length > 0 && teamRosters.Blue.length > 0) {
-                    return 'Välj ett lag (rött eller blått), klicka på "Select" för en spelare och placera spelaren på planen genom att klicka på en ruta.';
+                    return 'Choose a team (red or blue), click "Select" for a player, and place the player on the pitch by clicking a square.';
                   } else {
-                    return 'Lägg till lag via lagbyggaren för att börja.';
+                    return 'Add teams using the team builder to get started.';
                   }
                 })()
-                : 'Ingen block-info ännu'}
+                : 'No block info yet'}
             </Text>
           )}
         </AlertDescription>
