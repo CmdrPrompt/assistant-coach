@@ -14,7 +14,6 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ## Features
 
-
 - ✅ **Core Simulation Engine:**
   - **Strength & Dice Calculation:** Calculates the number of block dice (1, 2, or 3) and which coach chooses the result, based on player strength and assists.
   - **Assist Logic:** Calculates offensive and defensive assists from adjacent players, with full support for the `Guard` skill (engaged players can assist if they have Guard).
@@ -43,12 +42,20 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ---
 
-
 ## Upcoming Features in planning
 
 - **Skill Implementation:**
-  - Only `Guard` is fully implemented for assists.
-  - Planned: `Block`, `Dodge`, `Tackle`, `Wrestle`, `Dauntless`, `Horns`, `Juggernaut`, `Stand Firm`, `Fend`, `Pro`, `Brawler`, `Grab`, `Multiple Block`, `Frenzy` (logic and UI effects).
+  - Only `Guard` is fully implemented in assist logic.
+  - Planned skills that affect the number of dice or choice of result (according to documentation):
+    - `Guard`: Allows assisting even if the player is engaged. Increases strength in blocks, which can result in more dice.
+    - `Dauntless`: Can match strength against stronger opponents, may result in more dice if the test is successful.
+    - `Horns`: Grants +1 strength on Blitz, affects the number of dice.
+    - `Multiple Block`: Allows blocking two opponents, but reduces the number of dice per block.
+    - `Pro`: Allows rerolling one die, indirectly affects result choice.
+    - `Brawler`: Allows rerolling one of two dice in a block, affects result choice.
+    - `Juggernaut`: On Blitz, turns "Both Down" into "Push", affects result choice.
+    - `Frenzy`: Forces extra block if the opponent does not fall or is not pushed away, can indirectly affect the number of dice through positioning.
+  - Other skills (`Block`, `Dodge`, `Tackle`, `Wrestle`, `Stand Firm`, `Fend`, `Grab`) are planned or partially supported in the UI, but not in logic.
 
 - **Advanced UI:**
   - Zoom and scroll for pitch.
@@ -63,12 +70,14 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ## Tech Stack
 
-| Component      | Technology              |
-|:---------------|:------------------------|
-| UI Framework   | React (with Tailwind CSS) |
-| Build Tool     | Vite                    |
-| Core Logic     | JavaScript (ES Modules) |
-| Testing        | Vitest                  |
+| Component         | Technology                          |
+|:------------------|:------------------------------------|
+| UI Framework      | React, Chakra UI                    |
+| Build Tool        | Vite                                |
+| Styling           | Chakra UI, CSS Modules              |
+| Core Logic        | JavaScript (ES Modules)             |
+| Testing           | Vitest, Testing Library, jsdom      |
+| Linting           | ESLint (with React Hooks, Refresh)  |
 
 ---
 
