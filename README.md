@@ -12,6 +12,14 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ---
 
+## Demo
+
+This app in its current form can be tested at:
+
+[https://CmdrPrompt.github.io/blockassistant/](https://CmdrPrompt.github.io/blockassistant/)
+
+---
+
 ## Features
 
 - ✅ **Core Simulation Engine:**
