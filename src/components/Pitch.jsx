@@ -861,6 +861,7 @@ const Pitch = () => {
               }}
               nextId={nextPlayerId}
               autoFocusName={true}
+              onClose={closePlayerCreator}
             />
           </ModalBody>
         </ModalContent>

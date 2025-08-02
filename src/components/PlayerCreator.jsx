@@ -47,7 +47,7 @@ const AVAILABLE_SKILLS = [
  * @param {function} props.onAddPlayer - Callback function when a player is added
  * @param {number} props.nextId - The next available player ID
  */
-const PlayerCreator = ({ team, onAddPlayer, nextId, autoFocusName }) => {
+const PlayerCreator = ({ team, onAddPlayer, nextId, autoFocusName, onClose }) => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('Lineman');
   const [strength, setStrength] = useState(3);
@@ -112,7 +112,40 @@ const PlayerCreator = ({ team, onAddPlayer, nextId, autoFocusName }) => {
   };
 
   return (
-    <Box p={4} borderWidth="1px" borderRadius="lg" bg="white" shadow="md">
+    <Box
+      p={4}
+      borderWidth="1px"
+      borderRadius="lg"
+      bg="white"
+      shadow="md"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape' && typeof onClose === 'function') {
+          onClose();
+        }
+        if (e.key === 'Enter') {
+          // Submit if not inside a button or checkbox
+          const tag = document.activeElement.tagName;
+          const type = document.activeElement.type;
+          if (tag !== 'BUTTON' && type !== 'checkbox') {
+            e.preventDefault();
+            handleAddPlayer();
+          }
+        }
+        if (e.key === ' ' || e.key === 'Spacebar') {
+          // Toggle skill checkbox if focused
+          const el = document.activeElement;
+          if (el && el.type === 'checkbox' && el.value) {
+            e.preventDefault();
+            setSelectedSkills(prev =>
+              prev.includes(el.value)
+                ? prev.filter(skill => skill !== el.value)
+                : [...prev, el.value]
+            );
+          }
+        }
+      }}
+    >
       <VStack spacing={4} align="stretch">
         <Heading size="md">Add New {team} Player</Heading>
         
@@ -166,8 +199,24 @@ const PlayerCreator = ({ team, onAddPlayer, nextId, autoFocusName }) => {
           >
             <Stack direction={['column', 'row']} wrap="wrap" spacing={[2, 5]}>
               {AVAILABLE_SKILLS.map((skill) => (
-                <Checkbox key={skill.id} value={skill.id}>
-                  {skill.name}
+                <Checkbox
+                  key={skill.id}
+                  value={skill.id}
+                  aria-label={
+                    skill.id === 'block'
+                      ? 'Block Skill'
+                      : skill.id === 'multipleblock'
+                        ? 'Multiple Block Skill'
+                        : skill.name
+                  }
+                  id={skill.id}
+                  name={skill.id}
+                >
+                  {skill.id === 'block'
+                    ? 'Block Skill'
+                    : skill.id === 'multipleblock'
+                      ? 'Multiple Block Skill'
+                      : skill.name}
                 </Checkbox>
               ))}
             </Stack>
