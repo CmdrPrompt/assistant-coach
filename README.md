@@ -14,17 +14,14 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ## ✨ Features
 
+
 - ✅ **Core Simulation Engine:**
   - **Strength & Dice Calculation:** Calculates the number of block dice (1, 2, or 3) and which coach chooses the result, based on player strength and assists.
-  - **Assist Logic:** Calculates offensive and defensive assists from adjacent players, including correct handling of the `Guard` skill (engaged players can assist if they have Guard).
+  - **Assist Logic:** Calculates offensive and defensive assists from adjacent players, with full support for the `Guard` skill (engaged players can assist if they have Guard).
   - **Skill Implementation:**
-    - `Guard`: Engaged players can assist blocks.
-    - `Block`: Prevents Knocked Down on "Both Down".
-    - `Dodge`: Converts "Defender Stumbles" to "Push" unless negated.
-    - `Tackle`: Negates `Dodge` skill.
-    - `Wrestle`: On "Both Down", allows both players to be Placed Prone if neither has `Block`.
-    - `Dauntless`, `Horns`, `Juggernaut`, `Stand Firm`, `Fend`, `Pro`, `Brawler`, `Grab`, `Multiple Block`, `Frenzy`: (Planned/partial support)
-  - **Dice Result Logic:** Applies block dice results, including reroll and skill effects, with clear outcome descriptions.
+    - `Guard`: Fully implemented for assists.
+    - All other skills (`Block`, `Dodge`, `Tackle`, `Wrestle`, `Dauntless`, `Horns`, `Juggernaut`, `Stand Firm`, `Fend`, `Pro`, `Brawler`, `Grab`, `Multiple Block`, `Frenzy`) are planned or partially supported only in UI or description, not in logic.
+  - **Dice Result Logic:** Basic block dice result handling, but only Guard is fully supported in logic.
   - **Player Model:** Each player has position, strength, skills, and status (standing, prone, stunned).
   - **Test Coverage:** All core logic (block outcome, assists, dice chooser, player model, dice result application) is covered by unit tests using Vitest.
 
@@ -58,7 +55,8 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
   - More visual feedback (icons, dice roll animations).
   - Improved mobile support and accessibility.
 
-- **Other planned features:**
+-- **Other planned features:**
+  - Ability to change player status (standing, prone, stunned) via the GUI.
   - Statistics, export/import, AI coach suggestions, advanced team management. Who knows?
 
 ---
