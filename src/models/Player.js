@@ -1,5 +1,6 @@
 
 
+
 /**
  * @file Defines the Player class.
  */
@@ -32,7 +33,7 @@ export class Player {
    * @param {string[]} [props.skills=[]] - An array of skills the player possesses.
    * @param {'standing'|'prone'|'stunned'} [props.status='standing'] - The current status of the player.
    */
-  constructor({ id, name, team, position, strength, skills = [], status = 'standing' }) {
+constructor({ id, name, team, position, strength, skills = [], status = 'standing', cost, ma, st, ag, pa, av, normal, double, reRoll }) {
     /** @type {number} */
     this.id = id;
     /** @type {string} */
@@ -42,11 +43,27 @@ export class Player {
     /** @type {string} */
     this.position = position;
     /** @type {number} */
-    this.strength = strength;
+    this.strength = Number(st ?? strength);
     /** @type {string[]} */
-    this.skills = skills;
+    this.skills = skills ? skills : [];
     /** @type {'standing'|'prone'|'stunned'} */
-    this.status = status;
+    this.status = status ? status : 'standing';
+    /** @type {number|string} */
+    this.cost = cost;
+    /** @type {number|string} */
+    this.movement = Number(ma);
+    /** @type {number|string} */
+    this.agility = Number(ag);
+    /** @type {number|string} */
+    this.passing = Number(pa);
+    /** @type {number|string} */
+    this.armor = Number(av);
+    /** @type {string} */
+    this.normal = normal;
+    /** @type {string} */
+    this.double = double;
+    /** @type {string|number} */
+    this.reRoll = reRoll;
   }
 
   /**
