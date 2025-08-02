@@ -20,12 +20,11 @@ import {
  * 
  * @param {object} props - Component props
  * @param {string} props.team - The team identifier (e.g., 'Red' or 'Blue')
- * @param {string} props.actualTeamName - The actual team name (e.g., 'Imperial Guards', 'Wood Elves')
  * @param {Array} props.players - Array of Player objects in the roster
  * @param {function} props.onSelectPlayer - Callback when a player is selected for placement
  * @param {Set} props.placedPlayerIds - Set of IDs of players already placed on the pitch
  */
-const TeamRoster = ({ team, actualTeamName, players, onSelectPlayer, placedPlayerIds }) => {
+const TeamRoster = ({ team, players, onSelectPlayer, placedPlayerIds }) => {
   const bgColor = useColorModeValue(
     team === 'Red' ? 'red.50' : 'blue.50',
     team === 'Red' ? 'red.900' : 'blue.900'
@@ -57,7 +56,7 @@ const TeamRoster = ({ team, actualTeamName, players, onSelectPlayer, placedPlaye
     >
       <VStack spacing={4} align="stretch">
         <Heading size="md" color={headerColor}>
-          {team} Team Roster {actualTeamName ? `(${actualTeamName})` : ''} ({players.length} players)
+          {team} Team Roster ({players.length} players)
         </Heading>
         
         {players.length === 0 ? (
@@ -66,7 +65,6 @@ const TeamRoster = ({ team, actualTeamName, players, onSelectPlayer, placedPlaye
           <List spacing={2}>
             {players.map((player) => {
               const isPlaced = placedPlayerIds.has(player.id);
-              
               return (
                 <ListItem 
                   key={player.id}
@@ -76,26 +74,8 @@ const TeamRoster = ({ team, actualTeamName, players, onSelectPlayer, placedPlaye
                   bg={isPlaced ? 'gray.100' : 'white'}
                   opacity={isPlaced ? 0.7 : 1}
                 >
-                  <Flex justify="space-between" align="center">
-                    <Box>
-                      <Flex align="center" mb={1}>
-                        <Text fontWeight="bold" mr={2}>{player.name}</Text>
-                        <Badge mr={2} colorScheme="green">
-                          {player.position}
-                        </Badge>
-                        <Badge colorScheme={team === 'Red' ? 'red' : 'blue'}>
-                          ST {player.strength}
-                        </Badge>
-                        {isPlaced && (
-                          <Badge ml={2} colorScheme="gray">On Pitch</Badge>
-                        )}
-                      </Flex>
-                      <Tooltip label={formatSkills(player.skills)} placement="bottom">
-                        <Text fontSize="sm" noOfLines={1}>
-                          Skills: {formatSkills(player.skills)}
-                        </Text>
-                      </Tooltip>
-                    </Box>
+                  <Flex justify="space-between" align="center" mb={1}>
+                    <Text fontWeight="bold" color="gray.700" mr={2}>{player.position}</Text>
                     <Button
                       size="sm"
                       colorScheme={team === 'Red' ? 'red' : 'blue'}
@@ -105,6 +85,17 @@ const TeamRoster = ({ team, actualTeamName, players, onSelectPlayer, placedPlaye
                       {isPlaced ? 'Placed' : 'Select'}
                     </Button>
                   </Flex>
+                  <Text fontSize="sm" color="gray.700" mb={1}>
+                    MA {player.movement ?? '-'} ST {player.strength ?? '-'} AG {player.agility ?? '-'} PA {player.passing ?? '-'} AV {player.armor ?? '-'}
+                    {isPlaced && (
+                      <Badge ml={2} colorScheme="gray">On Pitch</Badge>
+                    )}
+                  </Text>
+                  <Tooltip label={formatSkills(player.skills)} placement="bottom">
+                    <Text fontSize="sm" color="gray.700">
+                      Skills: {formatSkills(player.skills)}
+                    </Text>
+                  </Tooltip>
                 </ListItem>
               );
             })}

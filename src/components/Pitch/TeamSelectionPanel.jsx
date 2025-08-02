@@ -19,9 +19,6 @@ const TeamSelectionPanel = ({
         {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
       </Select>
     </HStack>
-    <Button colorScheme="purple" size="sm" mt={2} onClick={openPlayerCreator}>
-      Add New Player
-    </Button>
   </Box>
 );
 

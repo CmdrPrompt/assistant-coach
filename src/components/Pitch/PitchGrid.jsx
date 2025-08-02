@@ -7,7 +7,6 @@ const PitchGrid = ({
   PITCH_ROWS,
   blockMode,
   blockOutcome,
-  actualTeamNames,
   selectedPlayer,
   setSquares,
   handleSquareClick,
@@ -91,7 +90,7 @@ const PitchGrid = ({
           tooltipLabel = (
             <VStack align="start" spacing={1} p={1}>
               <Text fontWeight="bold">{player.name}</Text>
-              <Text>Team: {actualTeamNames[player.team] || player.team}</Text>
+              <Text>Team: {player.team}</Text>
               <Text>Position: {player.position || 'Unknown'}</Text>
               <Text>Strength: {player.strength}</Text>
               <Text>Skills: {formatSkills(player.skills)}</Text>

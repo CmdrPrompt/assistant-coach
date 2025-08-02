@@ -34,9 +34,9 @@
 Antalet tärningar beror på styrkeförhållandet mellan den som gör blocken och den som blir blockerad:
 
 | Blockarens styrka vs. försvararens | Antal tärningar | Vem väljer resultatet |
-|------------------------------------|-----------------|----------------------|
-| ≥ 2× försvararens styrka           | 3               | Blockaren            |
-| > försvararens styrka              | 2               | Blockaren            |
-| = försvararens styrka              | 1               | Blockaren            |
-| < försvararens styrka              | 2               | Försvararen          |
-| ≤ ½ försvararens styrka            | 3               | Försvararen          |
+|------------------------------------|-----------------|------------------------|
+| > 2× försvararens styrka           | 3               | Blockaren              |
+| > försvararens styrka              | 2               | Blockaren              |
+| = försvararens styrka              | 1               | Blockaren              |
+| < försvararens styrka              | 2               | Försvararen            |
+| < ½ försvararens styrka            | 3               | Försvararen            |

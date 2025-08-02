@@ -4,11 +4,13 @@ import {
   Box, 
   Flex, 
   VStack, 
-  useDisclosure
+  useDisclosure,
+  Button
 } from '@chakra-ui/react';
 import PlayerDetailsModal from './Pitch/PlayerDetailsModal';
 import PlayerCreatorModal from './Pitch/PlayerCreatorModal';
 import TeamSelectionPanel from './Pitch/TeamSelectionPanel';
+import TeamBuilderPanel from './Pitch/TeamBuilderPanel';
 import BlockInfoPanel from './Pitch/BlockInfoPanel';
 import PitchGrid from './Pitch/PitchGrid';
 import PlayerCreator from './PlayerCreator';
@@ -26,6 +28,8 @@ const createEmptyGrid = (cols, rows) => Array.from({ length: cols * rows }, () =
 const TEAMS = ['Red', 'Blue'];
 
 const Pitch = () => {
+  // State för lagbyggar-modal
+  const [isTeamBuilderOpen, setTeamBuilderOpen] = useState(false);
   const [format] = useState('standard');
   const isPortrait = useBreakpointValue({ base: true, md: true, lg: false });
   const { cols, rows } = FORMATS[format];
@@ -45,6 +49,83 @@ const Pitch = () => {
     Red: [],
     Blue: []
   });
+  // Hantera lag från TeamBuilderPanel
+  const handleTeamBuilt = (rosterColor, players) => {
+    // Lista med anglosaxiska namn att använda
+    const angloNames = [
+      'Alfred', 'Beatrice', 'Cedric', 'Diana', 'Edgar', 'Fiona', 'Geoffrey', 'Harriet', 'Ivor', 'Joan',
+      'Kenneth', 'Lydia', 'Maurice', 'Nora', 'Oswald', 'Phyllis', 'Quentin', 'Rosamund', 'Stanley', 'Tabitha',
+      'Ursula', 'Victor', 'Winifred', 'Xavier', 'Yvonne', 'Zachary'
+    ];
+    setTeamRosters(prev => {
+      // Samla alla namn på planen och i båda lagens roster
+      const allNames = [
+        ...prev.Red.map(sp => sp.name),
+        ...prev.Blue.map(sp => sp.name),
+      ];
+      // Lägg till namn på spelare som redan placerats på planen
+      const placedNames = squares
+        .filter(sq => sq && sq.player && sq.player.name)
+        .map(sq => sq.player.name);
+      // Skapa en Set med alla använda namn
+      const usedNames = new Set([...allNames, ...placedNames]);
+
+      // Generera nya roster för det aktuella laget
+      const newRoster = players.map((p, idx) => {
+        let name;
+        let nameIdx = idx;
+        // Hitta första lediga namn i angloNames-listan, annars generera "Player <bokstav><nummer>"
+        while (nameIdx < angloNames.length && usedNames.has(angloNames[nameIdx])) {
+          nameIdx++;
+        }
+        if (nameIdx < angloNames.length) {
+          name = angloNames[nameIdx];
+        } else {
+          // Om alla namn är upptagna, generera "Player <bokstav><nummer>"
+          // Bokstav enligt idx, nummer enligt hur många gånger den bokstaven redan används
+          const letter = String.fromCharCode(65 + (idx % 26));
+          let num = 1;
+          let candidate = `Player ${letter}${num}`;
+          while (usedNames.has(candidate)) {
+            num++;
+            candidate = `Player ${letter}${num}`;
+          }
+          name = candidate;
+        }
+        usedNames.add(name);
+        // Helper för att parsa numeriska värden, returnerar null om saknas eller '-'
+        const parseNum = (val, fallback = null) => {
+          if (val === undefined || val === null || val === '' || val === '-') return fallback;
+          const num = parseInt(val, 10);
+          return isNaN(num) ? fallback : num;
+        };
+        return {
+          id: `${rosterColor}-${idx+1}`,
+          team: rosterColor,
+          name,
+          position: p.Position,
+          skills: p.skills
+            ? p.skills
+            : (p.Skills ? p.Skills.split(',').map(s => s.trim()) : []),
+          strength: p.Strength
+            ? parseNum(p.Strength, 3)
+            : parseNum(p.ST, 3),
+          movement: parseNum(p.MA, 6),
+          agility: parseNum(p.AG, 3),
+          armor: parseNum(p.AV, 8),
+          cost: parseNum(p.Cost, 0),
+          passing: parseNum(p.PA),
+          ...p
+        };
+      });
+
+      return {
+        ...prev,
+        [rosterColor]: newRoster
+      };
+    });
+    setSelectedTeam(rosterColor);
+  };
   
   
   // State for player selection
@@ -150,8 +231,8 @@ const Pitch = () => {
     
     // Log for debugging
     console.log('Block outcome calculated inside function:', {
-      blocker: blocker.player.name,
-      target: target.player.name,
+      blocker: `${blocker.player.name} (${blocker.player.position})`,
+      target: `${target.player.name} (${target.player.position})`,
       outcome: outcome
     });
   };
@@ -163,10 +244,17 @@ const Pitch = () => {
       // Place the selected player on the square if it's empty
       if (squares[index]) return;
       const newSquares = [...squares];
+      // Kopiera spelaren och sätt status till 'standing'
+      let placedPlayer;
+      if (selectedPlayer instanceof Player) {
+        placedPlayer = { ...selectedPlayer, status: 'standing' };
+      } else {
+        placedPlayer = new Player({ ...selectedPlayer, status: 'standing' });
+      }
       newSquares[index] = { 
         team: selectedPlayer.team, 
         number: teamRosters[selectedPlayer.team].findIndex(p => p.id === selectedPlayer.id) + 1,
-        player: selectedPlayer 
+        player: placedPlayer
       };
       setSquares(newSquares);
       setPlacedPlayerIds(prev => new Set([...prev, selectedPlayer.id]));
@@ -196,7 +284,13 @@ const Pitch = () => {
         setBlockOutcome(null);
       }
     } else {
-      // If clicking an empty square with no player selected, do nothing
+      // If clicking an empty square with no player selected and a blocker is set, reset blocker
+      if (blocker) {
+        setBlocker(null);
+        setTarget(null);
+        setBlockOutcome(null);
+      }
+      // Otherwise do nothing
       return;
     }
   };
@@ -212,7 +306,6 @@ const Pitch = () => {
               TEAMS={TEAMS}
               selectedTeam={selectedTeam}
               setSelectedTeam={setSelectedTeam}
-              openPlayerCreator={openPlayerCreator}
             />
             <TeamRoster 
               team={selectedTeam}
@@ -221,16 +314,37 @@ const Pitch = () => {
               onSelectPlayer={handleSelectPlayer}
               placedPlayerIds={placedPlayerIds}
             />
+            {/* Add new player button between TeamRoster and Öppna lagbyggare */}
+            <Button colorScheme="blue" size="sm" mt={2} onClick={() => setTeamBuilderOpen(true)}>
+              Öppna lagbyggare
+            </Button>
+            <TeamBuilderPanel
+              isOpen={isTeamBuilderOpen}
+              onClose={() => setTeamBuilderOpen(false)}
+              onTeamBuilt={handleTeamBuilt}
+              defaultRoster={
+                teamRosters.Red.length === 0 && teamRosters.Blue.length === 0
+                  ? 'Red'
+                  : teamRosters.Red.length === 0
+                    ? 'Red'
+                    : teamRosters.Blue.length === 0
+                      ? 'Blue'
+                      : 'Red'
+              }
+            />
           </VStack>
         </Box>
         <Box flex="2" h="100%" p={0} m={0} alignSelf="flex-start">
           <VStack spacing={2} align="stretch" mb={2} h="auto">
             <BlockInfoPanel
-              blockMode={blockMode}
-              blocker={blocker}
-              target={target}
-              blockOutcome={blockOutcome}
-            />
+            blockMode={blockMode}
+            blocker={blocker}
+            target={target}
+            blockOutcome={blockOutcome}
+            teamRosters={teamRosters}
+            squares={squares}
+            showPosition={true}
+          />
           </VStack>
           <PitchGrid
             squares={squares}
