@@ -61,11 +61,11 @@ const BlockInfoPanel = ({
             <>
               <Text>
                 <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'}>
-                  {blocker.player.name} ({blocker.player.position})
+                  {blocker.player.name} ({blocker.player.position} #{blocker.number})
                 </Badge> 
                 {' '}blocking{' '}
                 <Badge colorScheme={target.team === 'Red' ? 'red' : 'blue'}>
-                  {target.player.name} ({target.player.position})
+                  {target.player.name} ({target.player.position} #{target.number})
                 </Badge>
               </Text>
               <Text>
