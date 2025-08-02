@@ -28,7 +28,6 @@
 | Pro              | Ger möjlighet att slå om en tärning (t.ex. om båda är dåliga), vilket indirekt påverkar resultatval. |
 | Brawler          | Tillåter att en av två tärningar slås om vid block, vilket påverkar resultatval. |
 | Juggernaut       | (vid Blitz): Omvandlar "Both Down" till "Push", vilket påverkar resultatet du får välja. |
-
 | Frenzy           | Tvingar spelaren att göra ett extra block om motståndaren inte faller eller flyttas ur kontakt. Kan påverka antal tärningar indirekt genom positionering. |
  
 ## Hur många tärningar slås?
