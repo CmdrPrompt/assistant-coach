@@ -1,33 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Grid, 
-  GridItem, 
   useBreakpointValue, 
-  Select, 
   Box, 
   Flex, 
   VStack, 
-  HStack, 
-  Tooltip,
-  Text,
-  Divider,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  Badge,
-  Switch,
-  FormControl,
-  FormLabel,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription
+  useDisclosure
 } from '@chakra-ui/react';
+import PlayerDetailsModal from './Pitch/PlayerDetailsModal';
+import PlayerCreatorModal from './Pitch/PlayerCreatorModal';
+import TeamSelectionPanel from './Pitch/TeamSelectionPanel';
+import BlockInfoPanel from './Pitch/BlockInfoPanel';
+import PitchGrid from './Pitch/PitchGrid';
 import PlayerCreator from './PlayerCreator';
 import TeamRoster from './TeamRoster';
 import { Player } from '@/models/Player';
@@ -79,8 +62,8 @@ const Pitch = () => {
   const [nextPlayerId, setNextPlayerId] = useState(1);
   
   // Modal for player details
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedSquarePlayer, setSelectedSquarePlayer] = useState(null);
+  const { isOpen, onClose } = useDisclosure();
+  const [selectedSquarePlayer] = useState(null);
 
   // Modal for PlayerCreator
   const {
@@ -443,47 +426,19 @@ const Pitch = () => {
     });
   };
 
-  // Format skills as a comma-separated string
-  const formatSkills = (skills) => {
-    if (!skills || skills.length === 0) return 'None';
-    return skills.map(skill => 
-      skill.charAt(0).toUpperCase() + skill.slice(1)
-    ).join(', ');
-  };
 
   return (
     <Box w="100vw" h="100vh" p={0} m={0}>
       <Flex direction={{ base: "column", lg: "row" }} align="flex-start" h="100%" w="100%" p={0} m={0}>
         <Box flex="1.2" minW="312px" maxW="408px" p={2} m={0} alignSelf="flex-start">
           <VStack spacing={2} align="stretch">
-
-
-            <Box mb={2}>
-              <Text fontWeight="bold" mb={1} fontSize="md">Team Selection & Test Teams</Text>
-              <HStack spacing={2}>
-                <Select 
-                  value={selectedTeam} 
-                  onChange={e => setSelectedTeam(e.target.value)} 
-                  maxW="160px"
-                  size="sm"
-                >
-                  {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
-                </Select>
-                <Button 
-                  colorScheme="teal" 
-                  size="sm" 
-                  px={4}
-                  onClick={generateTestPlayers}
-                >
-                  Generate Test Teams
-                </Button>
-              </HStack>
-            </Box>
-
-            <Button colorScheme="purple" size="sm" mb={2} onClick={openPlayerCreator}>
-              Add New Player
-            </Button>
-
+            <TeamSelectionPanel
+              TEAMS={TEAMS}
+              selectedTeam={selectedTeam}
+              setSelectedTeam={setSelectedTeam}
+              generateTestPlayers={generateTestPlayers}
+              openPlayerCreator={openPlayerCreator}
+            />
             <TeamRoster 
               team={selectedTeam}
               actualTeamName={actualTeamNames[selectedTeam]}
@@ -493,348 +448,46 @@ const Pitch = () => {
             />
           </VStack>
         </Box>
-        
         <Box flex="2" h="100%" p={0} m={0} alignSelf="flex-start">
           <VStack spacing={2} align="stretch" mb={2} h="auto">
-            {/* Block mode is always active. Block mode toggle removed. */}
-            
-            {/* Instructions based on current mode */}
-            {blockMode ? (
-              <Box>
-                {!blocker && !target && (
-                  <Text>Select a player to be the blocker</Text>
-                )}
-                {blocker && !target && (
-                  <Text>
-                    Blocker: <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'}>
-                      {blocker.player.name} (ST {blocker.player.strength})
-                    </Badge> - Now select an opponent to block
-                  </Text>
-                )}
-                {blocker && target && blockOutcome && !blockOutcome.error && (
-                  <Alert status="warning" borderRadius="md" bg="#FFF9DB" color="#7C6F00">
-                    <AlertIcon color="#FFD600" />
-                    <Box>
-                      <AlertTitle>Block Result</AlertTitle>
-                      <AlertDescription>
-                        <Text>
-                          <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'}>
-                            {blocker.player.name}
-                          </Badge> 
-                          {' '}blocking{' '}
-                          <Badge colorScheme={target.team === 'Red' ? 'red' : 'blue'}>
-                            {target.player.name}
-                          </Badge>
-                        </Text>
-                        <Text>
-                          Blocker Strength: {blockOutcome.blockerStrength} 
-                          {blockOutcome.blockerAssists > 0 && ` (${blocker.player.strength} + ${blockOutcome.blockerAssists} assists)`}
-                        </Text>
-                        {blockOutcome.blockerAssistingPlayers && Array.isArray(blockOutcome.blockerAssistingPlayers) && blockOutcome.blockerAssistingPlayers.length > 0 && (
-                          <Text fontSize="sm" ml={4} color="gray.600">
-                            {blockOutcome.blockerAssistingPlayers.length === 1 ? 'Assist from:' : 'Assists from:'} {blockOutcome.blockerAssistingPlayers.map(ap => {
-                              if (!ap || !ap.player) return null;
-                              const showGuard = ap.reason === 'Guard skill';
-                              return (
-                                <span key={ap.player.id || Math.random()} style={{ marginRight: 8 }}>
-                                  <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'} mr={1}>
-                                    {ap.player.name}
-                                  </Badge>
-                                  {showGuard && (
-                                    <span style={{ fontSize: '0.85em', color: '#888', marginLeft: 2 }}>
-                                      [Guard]
-                                    </span>
-                                  )}
-                                </span>
-                              );
-                            })}
-                          </Text>
-                        )}
-                        <Text>
-                          Target Strength: {blockOutcome.targetStrength}
-                          {blockOutcome.targetAssists > 0 && ` (${target.player.strength} + ${blockOutcome.targetAssists} assists)`}
-                        </Text>
-                        {blockOutcome.targetAssistingPlayers && Array.isArray(blockOutcome.targetAssistingPlayers) && blockOutcome.targetAssistingPlayers.length > 0 && (
-                          <Text fontSize="sm" ml={4} color="gray.600">
-                            {blockOutcome.targetAssistingPlayers.length === 1 ? 'Assist from:' : 'Assists from:'} {blockOutcome.targetAssistingPlayers.map(ap => {
-                              if (!ap || !ap.player) return null;
-                              const showGuard = ap.reason === 'Guard skill';
-                              return (
-                                <span key={ap.player.id || Math.random()} style={{ marginRight: 8 }}>
-                                  <Badge colorScheme={target.team === 'Red' ? 'red' : 'blue'} mr={1}>
-                                    {ap.player.name}
-                                  </Badge>
-                                  {showGuard && (
-                                    <span style={{ fontSize: '0.85em', color: '#888', marginLeft: 2 }}>
-                                      [Guard]
-                                    </span>
-                                  )}
-                                </span>
-                              );
-                            })}
-                          </Text>
-                        )}
-                        <Text fontWeight="bold" mt={2}>
-                          Roll {blockOutcome.diceCount} block dice, {blockOutcome.chooser === 'blocker' ? 'blocker' : 'defender'} chooses
-                        </Text>
-                      </AlertDescription>
-                    </Box>
-                  </Alert>
-                )}
-                {blocker && target && blockOutcome && blockOutcome.error && (
-                  <Alert status="error" borderRadius="md">
-                    <AlertIcon />
-                    <Box>
-                      <AlertTitle>Invalid Block</AlertTitle>
-                      <AlertDescription>
-                        {blockOutcome.error}
-                      </AlertDescription>
-                    </Box>
-                  </Alert>
-                )}
-              </Box>
-            ) : (
-              <Box>
-                {selectedPlayer ? (
-                  <Text fontWeight="bold" color={selectedPlayer.team === 'Red' ? 'red.500' : 'blue.500'}>
-                    Click on the pitch to place {selectedPlayer.name} (ST {selectedPlayer.strength})
-                  </Text>
-                ) : (
-                  <Text>Select a player from the roster to place on the pitch, or click on a placed player to view details</Text>
-                )}
-              </Box>
-            )}
+            <BlockInfoPanel
+              blockMode={blockMode}
+              blocker={blocker}
+              target={target}
+              blockOutcome={blockOutcome}
+            />
           </VStack>
-          
-          <Grid
-            w="100%"
-            h={{ base: "60vw", md: "80vh" }}
-            maxH="80vh"
-            aspectRatio={`${PITCH_COLS}/${PITCH_ROWS}`}
-            templateColumns={`repeat(${PITCH_COLS}, 1fr)`}
-            templateRows={`repeat(${PITCH_ROWS}, 1fr)`}
-            gap="1px"
-            bg="gray.400"
-            border="2px solid"
-            borderColor="gray.400"
-            m={0}
-            alignSelf="flex-start"
-          >
-            {squares.map((square, index) => {
-                const row = Math.floor(index / PITCH_COLS);
-                const col = index % PITCH_COLS;
-
-                // Schackrutig bas
-                const isLight = (row + col) % 2 === 0;
-                const lightGreen = "#a7e9af";
-                const darkGreen = "#6ec177";
-                let bg = isLight ? lightGreen : darkGreen;
-
-                // End zones: hela första och sista kolumnen
-                const isEndZone = col === 0 || col === PITCH_COLS - 1;
-                if (isEndZone) bg = "#d6bcfa";
-
-                // Border styling
-                let borderTop, borderBottom, borderLeft, borderRight;
-                const borderColor = "#e2e8f0"; // ljusgrå
-
-                const isLeftEdge = col === 0;
-                const isRightEdge = col === PITCH_COLS - 1;
-                const isTopEdge = row === 0;
-                const isBottomEdge = row === PITCH_ROWS - 1;
-
-                if (isTopEdge) borderTop = `4px solid ${borderColor}`;
-                if (isBottomEdge) borderBottom = `4px solid ${borderColor}`;
-                if (isLeftEdge) borderLeft = `4px solid ${borderColor}`;
-                if (isRightEdge) borderRight = `4px solid ${borderColor}`;
-
-                // Mittlinje mellan kolumn 12 och 13
-                if (col === 12) borderRight = `4px solid ${borderColor}`;
-                
-                // End zone borders - add gray lines to delimit the end zones
-                if (col === 0) borderRight = `4px solid ${borderColor}`;
-                if (col === PITCH_COLS - 2) borderRight = `4px solid ${borderColor}`;
-                
-                // Wide zone borders - add gray lines to delimit the wide zones
-                if (row === 3) borderBottom = `4px solid ${borderColor}`;
-                if (row === 10) borderBottom = `4px solid ${borderColor}`;
-
-                // Check if this square contains an assisting player
-                let isBlockerAssist = false;
-                let isTargetAssist = false;
-                
-                if (blockMode && blockOutcome && square) {
-                  // Check if this player is assisting the blocker
-                  if (blockOutcome.blockerAssistingPlayers && Array.isArray(blockOutcome.blockerAssistingPlayers)) {
-                    isBlockerAssist = blockOutcome.blockerAssistingPlayers.some(ap => 
-                      ap && ap.player && ap.player.id === square.player.id
-                    );
-                  }
-                  
-                  // Check if this player is assisting the target
-                  if (blockOutcome.targetAssistingPlayers && Array.isArray(blockOutcome.targetAssistingPlayers)) {
-                    isTargetAssist = blockOutcome.targetAssistingPlayers.some(ap => 
-                      ap && ap.player && ap.player.id === square.player.id
-                    );
-                  }
-                }
-                
-                // Determine background color based on team and assist status
-                let squareBg = bg; // Default to pitch color
-                if (square) {
-                  if (square.team === 'Red') {
-                    squareBg = isBlockerAssist || isTargetAssist ? 'red.300' : 'red.400'; // Brighter red for assists
-                  } else {
-                    squareBg = isBlockerAssist || isTargetAssist ? 'blue.300' : 'blue.400'; // Brighter blue for assists
-                  }
-                }
-                
-                // Create tooltip content for player info
-                let tooltipLabel = null;
-                if (square && square.player) {
-                  const player = square.player;
-                  tooltipLabel = (
-                    <VStack align="start" spacing={1} p={1}>
-                      <Text fontWeight="bold">{player.name}</Text>
-                      <Text>Team: {actualTeamNames[player.team] || player.team}</Text>
-                      <Text>Position: {player.position || 'Unknown'}</Text>
-                      <Text>Strength: {player.strength}</Text>
-                      <Text>Skills: {formatSkills(player.skills)}</Text>
-                      <Text>Status: {player.status}</Text>
-                      {isBlockerAssist && <Text color="green.500">Assisting Blocker</Text>}
-                      {isTargetAssist && <Text color="green.500">Assisting Target</Text>}
-                    </VStack>
-                  );
-                }
-
-                // Drag and drop event handlers
-                const handleDragStart = () => {
-                  if (square) {
-                    setDraggedPlayer(square);
-                    setDraggedFrom({ row, col });
-                  }
-                };
-                const handleDragOver = (e) => {
-                  e.preventDefault();
-                };
-                const handleDrop = () => {
-                  // Tillåt bara flytt till tom ruta
-                  if (
-                    draggedPlayer &&
-                    (row !== draggedFrom?.row || col !== draggedFrom?.col) &&
-                    !squares[row * PITCH_COLS + col]
-                  ) {
-                    // Flytta spelaren
-                    const newSquares = [...squares];
-                    newSquares[draggedFrom.row * PITCH_COLS + draggedFrom.col] = null;
-                    newSquares[row * PITCH_COLS + col] = draggedPlayer;
-                    setSquares(newSquares);
-                    setDraggedPlayer(null);
-                    setDraggedFrom(null);
-                  }
-                };
-                const handleDragEnd = () => {
-                  setDraggedPlayer(null);
-                  setDraggedFrom(null);
-                };
-
-                const gridItem = (
-                  <GridItem
-                    key={index}
-                    bg={squareBg}
-                    borderTop={borderTop}
-                    borderBottom={borderBottom}
-                    borderLeft={borderLeft}
-                    borderRight={borderRight}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor={selectedPlayer || square ? 'pointer' : 'default'}
-                    onClick={() => handleSquareClick(index)}
-                    fontWeight="bold"
-                    transition="background 0.2s"
-                    position="relative"
-                    draggable={!!square}
-                    onDragStart={handleDragStart}
-                    onDragOver={handleDragOver}
-                    onDrop={handleDrop}
-                    onDragEnd={handleDragEnd}
-                  >
-                    {square ? square.number : ''}
-                  </GridItem>
-                );
-
-                return square && square.player ? (
-                  <Tooltip key={index} label={tooltipLabel} placement="top" hasArrow>
-                    {gridItem}
-                  </Tooltip>
-                ) : gridItem;
-            })}
-          </Grid>
+          <PitchGrid
+            squares={squares}
+            setSquares={setSquares}
+            PITCH_COLS={PITCH_COLS}
+            PITCH_ROWS={PITCH_ROWS}
+            blockMode={blockMode}
+            blockOutcome={blockOutcome}
+            actualTeamNames={actualTeamNames}
+            selectedPlayer={selectedPlayer}
+            handleSquareClick={handleSquareClick}
+            draggedPlayer={draggedPlayer}
+            setDraggedPlayer={setDraggedPlayer}
+            draggedFrom={draggedFrom}
+            setDraggedFrom={setDraggedFrom}
+          />
         </Box>
       </Flex>
-
-      {/* Modal for player details */}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            Player Details
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            {selectedSquarePlayer && (
-              <VStack align="start" spacing={3}>
-                <Box>
-                  <Text fontWeight="bold">Name:</Text>
-                  <Text>{selectedSquarePlayer.name}</Text>
-                </Box>
-                <Box>
-                  <Text fontWeight="bold">Team:</Text>
-                  <Text>{selectedSquarePlayer.team}</Text>
-                </Box>
-                <Box>
-                  <Text fontWeight="bold">Position:</Text>
-                  <Text>{selectedSquarePlayer.position || 'Unknown'}</Text>
-                </Box>
-                <Box>
-                  <Text fontWeight="bold">Strength:</Text>
-                  <Text>{selectedSquarePlayer.strength}</Text>
-                </Box>
-                <Box>
-                  <Text fontWeight="bold">Skills:</Text>
-                  <Text>{formatSkills(selectedSquarePlayer.skills)}</Text>
-                </Box>
-                <Box>
-                  <Text fontWeight="bold">Status:</Text>
-                  <Text>{selectedSquarePlayer.status}</Text>
-                </Box>
-              </VStack>
-            )}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-
-      {/* Modal for PlayerCreator */}
-      <Modal isOpen={isPlayerCreatorOpen} onClose={closePlayerCreator}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add New Player</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <PlayerCreator 
-              team={selectedTeam}
-              onAddPlayer={player => {
-                handleAddPlayer(player);
-                closePlayerCreator();
-              }}
-              nextId={nextPlayerId}
-              autoFocusName={true}
-              onClose={closePlayerCreator}
-            />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      {/* Player Details Modal */}
+      <PlayerDetailsModal
+        isOpen={isOpen}
+        onClose={onClose}
+        player={selectedSquarePlayer}
+      />
+      {/* Player Creator Modal */}
+      <PlayerCreatorModal
+        isOpen={isPlayerCreatorOpen}
+        onClose={closePlayerCreator}
+        team={selectedTeam}
+        onAddPlayer={handleAddPlayer}
+        nextId={nextPlayerId}
+      />
     </Box>
   );
 };
