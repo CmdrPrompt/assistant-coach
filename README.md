@@ -10,6 +10,24 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
 
 ## Demo
 
+## Implemented Features
+
+- Modular React component architecture (Pitch, TeamBuilderPanel, TeamRoster, BlockInfoPanel, etc.)
+- Team builder modal with CSV import, player selection, sorting, and stat mapping
+- Unique player name generation and realistic stat mapping from CSV
+- Robust handling of missing/null values in team and player data
+- Table formatting and alignment for team builder, including scrollable layout and dynamic columns
+- Sorting logic for player types: linemen last, then by max allowed, then alphabetically
+- Team info box width matches player selector for consistent UI
+- Team roster and builder layouts optimized for readability and usability
+- Block dice logic fully matches official Blood Bowl rules, including assists and Guard skill
+- Unified BlockInfoPanel: always-visible block result field, context-sensitive instructions, dynamic color feedback
+- Keyboard shortcuts in team builder modal: add/remove players (1-9/0, ctrl+number), create team (Enter)
+- React hook dependency warnings resolved, state management cleaned up (no duplicate declarations)
+- All state handled via React props/hooks, no window globals
+- Modal dialog for team builder with default roster color logic and improved button placement
+- All main logic and UI components covered by unit tests (Vitest)
+
 ## Features
 
 - **Core Simulation Engine:**
