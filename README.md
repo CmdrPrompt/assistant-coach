@@ -53,7 +53,8 @@ This app helps Blood Bowl players quickly analyze blocking situations. It's desi
     - `Brawler`: Allows rerolling one of two dice in a block, affects result choice.
     - `Juggernaut`: On Blitz, turns "Both Down" into "Push", affects result choice.
     - `Frenzy`: Forces extra block if the opponent does not fall or is not pushed away, can indirectly affect the number of dice through positioning.
-- `Dice Result Logic`: Basic block dice result handling.
+- **Dice Result Logic**
+  - Basic block dice result handling.
 
 - **Advanced UI:**
   - Zoom and scroll for pitch.
