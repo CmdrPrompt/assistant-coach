@@ -9,15 +9,19 @@ const TeamSelectionPanel = ({
 }) => (
   <Box mb={2}>
     <Text fontWeight="bold" mb={1} fontSize="md">Team Selection</Text>
-    <HStack spacing={2}>
-      <Select 
-        value={selectedTeam} 
-        onChange={e => setSelectedTeam(e.target.value)} 
-        maxW="160px"
-        size="sm"
-      >
-        {TEAMS.map(team => <option key={team} value={team}>{team}</option>)}
-      </Select>
+    <HStack spacing={4}>
+      {TEAMS.map(team => (
+        <label key={team} style={{ marginRight: 8 }}>
+          <input
+            type="radio"
+            name="selectedTeam"
+            value={team}
+            checked={selectedTeam === team}
+            onChange={e => setSelectedTeam(e.target.value)}
+          />
+          {team}
+        </label>
+      ))}
     </HStack>
   </Box>
 );

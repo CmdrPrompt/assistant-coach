@@ -194,14 +194,28 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
           <Box>
             <HStack mb={3}>
               <Text>Select roster:</Text>
-              <Select
-                value={targetRoster}
-                onChange={e => setTargetRoster(e.target.value)}
-                width="100px"
-              >
-                <option value="Red">Röd</option>
-                <option value="Blue">Blå</option>
-              </Select>
+              <Box>
+                <label style={{ marginRight: 12 }}>
+                  <input
+                    type="radio"
+                    name="rosterColor"
+                    value="Red"
+                    checked={targetRoster === 'Red'}
+                    onChange={e => setTargetRoster(e.target.value)}
+                  />
+                  Red
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="rosterColor"
+                    value="Blue"
+                    checked={targetRoster === 'Blue'}
+                    onChange={e => setTargetRoster(e.target.value)}
+                  />
+                  Blue
+                </label>
+              </Box>
             </HStack>
             <Select
               placeholder="Select team"
