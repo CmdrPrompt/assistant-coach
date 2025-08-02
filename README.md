@@ -1,4 +1,4 @@
-# Block Assistant
+# Assistant Coach
 
 *Blood Bowl Block Calculator Web App*
 
