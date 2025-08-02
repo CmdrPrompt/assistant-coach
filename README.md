@@ -9,6 +9,9 @@ An interactive frontend tool that calculates the number of dice rolled in blocki
 This app helps Blood Bowl players quickly analyze blocking situations. It's designed to support tactical decision-making both in gameplay and practice sessions and to correctly calculate the number of dice to roll in any given situation.
 
 ## Demo
+This app in its current form can be tested at:
+
+https://CmdrPrompt.github.io/blockassistant/
 
 ## Implemented Features
 
