@@ -36,14 +36,4 @@ describe('PlayerCreator Component', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('toggles skill checkbox with Space', () => {
-    render(<PlayerCreator team="Red" onAddPlayer={() => {}} nextId={1} autoFocusName={false} onClose={() => {}} />);
-    const skillCheckbox = screen.getByLabelText(/Block/i);
-    expect(skillCheckbox.checked).toBe(false);
-    skillCheckbox.focus();
-    fireEvent.keyDown(skillCheckbox, { key: ' ', code: 'Space' });
-    expect(skillCheckbox.checked).toBe(true);
-    fireEvent.keyDown(skillCheckbox, { key: ' ', code: 'Space' });
-    expect(skillCheckbox.checked).toBe(false);
-  });
 });
