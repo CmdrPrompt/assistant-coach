@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 http___localhost_5173_-*.jpeg
 
+# Secrets
+secrets.env
