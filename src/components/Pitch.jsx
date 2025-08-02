@@ -28,7 +28,7 @@ const createEmptyGrid = (cols, rows) => Array.from({ length: cols * rows }, () =
 const TEAMS = ['Red', 'Blue'];
 
 const Pitch = () => {
-  // State för lagbyggar-modal
+  // State for team builder modal
   const [isTeamBuilderOpen, setTeamBuilderOpen] = useState(false);
   const [format] = useState('standard');
   const isPortrait = useBreakpointValue({ base: true, md: true, lg: false });
@@ -49,40 +49,40 @@ const Pitch = () => {
     Red: [],
     Blue: []
   });
-  // Hantera lag från TeamBuilderPanel
+  // Handle team built from TeamBuilderPanel
   const handleTeamBuilt = (rosterColor, players) => {
-    // Lista med anglosaxiska namn att använda
+    // List of Anglo-Saxon names to use
     const angloNames = [
       'Alfred', 'Beatrice', 'Cedric', 'Diana', 'Edgar', 'Fiona', 'Geoffrey', 'Harriet', 'Ivor', 'Joan',
       'Kenneth', 'Lydia', 'Maurice', 'Nora', 'Oswald', 'Phyllis', 'Quentin', 'Rosamund', 'Stanley', 'Tabitha',
       'Ursula', 'Victor', 'Winifred', 'Xavier', 'Yvonne', 'Zachary'
     ];
     setTeamRosters(prev => {
-      // Samla alla namn på planen och i båda lagens roster
+      // Collect all names on the pitch and in both team rosters
       const allNames = [
         ...prev.Red.map(sp => sp.name),
         ...prev.Blue.map(sp => sp.name),
       ];
-      // Lägg till namn på spelare som redan placerats på planen
+      // Add names of players already placed on the pitch
       const placedNames = squares
         .filter(sq => sq && sq.player && sq.player.name)
         .map(sq => sq.player.name);
-      // Skapa en Set med alla använda namn
+      // Create a Set with all used names
       const usedNames = new Set([...allNames, ...placedNames]);
 
-      // Generera nya roster för det aktuella laget
+      // Generate new roster for the current team
       const newRoster = players.map((p, idx) => {
         let name;
         let nameIdx = idx;
-        // Hitta första lediga namn i angloNames-listan, annars generera "Player <bokstav><nummer>"
+        // Find first available name in angloNames list, otherwise generate "Player <letter><number>"
         while (nameIdx < angloNames.length && usedNames.has(angloNames[nameIdx])) {
           nameIdx++;
         }
         if (nameIdx < angloNames.length) {
           name = angloNames[nameIdx];
         } else {
-          // Om alla namn är upptagna, generera "Player <bokstav><nummer>"
-          // Bokstav enligt idx, nummer enligt hur många gånger den bokstaven redan används
+          // If all names are taken, generate "Player <letter><number>"
+          // Letter according to idx, number according to how many times that letter is already used
           const letter = String.fromCharCode(65 + (idx % 26));
           let num = 1;
           let candidate = `Player ${letter}${num}`;
@@ -93,7 +93,7 @@ const Pitch = () => {
           name = candidate;
         }
         usedNames.add(name);
-        // Helper för att parsa numeriska värden, returnerar null om saknas eller '-'
+        // Helper to parse numeric values, returns null if missing or '-'
         const parseNum = (val, fallback = null) => {
           if (val === undefined || val === null || val === '' || val === '-') return fallback;
           const num = parseInt(val, 10);
@@ -244,7 +244,7 @@ const Pitch = () => {
       // Place the selected player on the square if it's empty
       if (squares[index]) return;
       const newSquares = [...squares];
-      // Kopiera spelaren och sätt status till 'standing'
+      // Copy the player and set status to 'standing'
       let placedPlayer;
       if (selectedPlayer instanceof Player) {
         placedPlayer = { ...selectedPlayer, status: 'standing' };
@@ -314,9 +314,9 @@ const Pitch = () => {
               onSelectPlayer={handleSelectPlayer}
               placedPlayerIds={placedPlayerIds}
             />
-            {/* Add new player button between TeamRoster and Öppna lagbyggare */}
+            {/* Add new player button between TeamRoster and Open Team Builder */}
             <Button colorScheme="blue" size="sm" mt={2} onClick={() => setTeamBuilderOpen(true)}>
-              Öppna lagbyggare
+              Open Team Builder
             </Button>
             <TeamBuilderPanel
               isOpen={isTeamBuilderOpen}

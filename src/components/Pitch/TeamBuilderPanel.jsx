@@ -188,12 +188,12 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent width="1000px" maxW="100vw">
-        <ModalHeader>Bygg lag</ModalHeader>
+        <ModalHeader>Build Team</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box>
             <HStack mb={3}>
-              <Text>Välj roster:</Text>
+              <Text>Select roster:</Text>
               <Select
                 value={targetRoster}
                 onChange={e => setTargetRoster(e.target.value)}
@@ -204,7 +204,7 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
               </Select>
             </HStack>
             <Select
-              placeholder="Välj lag"
+              placeholder="Select team"
               value={selectedTeam}
               onChange={e => setSelectedTeam(e.target.value)}
               mb={3}
@@ -222,7 +222,7 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
                     const info = teamRows[0];
                     return (
                       <Box mb={2} p={2} bg="gray.50" borderRadius="md" borderWidth={1} w="100%" maxW="100%">
-                        <Text fontWeight="bold" fontSize="md">Laginfo</Text>
+                        <Text fontWeight="bold" fontSize="md">Team Info</Text>
                         <Text><b>Tier:</b> {info.Tier || '-'}</Text>
                         <Text><b>Reroll:</b> {info.Reroll || '-'}</Text>
                         <Text><b>Apothecary:</b> {info.Apothecary || '-'}</Text>
@@ -233,9 +233,9 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
                   return null;
                 })()}
                 <Text fontWeight="semibold">
-                  Välj spelare (max {MAX_PLAYERS} totalt)
+                  Select players (max {MAX_PLAYERS} total)
                   <span style={{ marginLeft: 8, color: '#3182ce', fontWeight: 'normal', fontSize: '0.95em' }}>
-                    ({selectedPlayers.length} valda)
+                    ({selectedPlayers.length} selected)
                     {selectedPlayers.length > 0 && (() => {
                       const totalCost = selectedPlayers.reduce((sum, p) => sum + (parseInt(p.Cost, 10) || 0), 0);
                       const teamValue = Math.round(totalCost / 1000);
@@ -260,9 +260,9 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
                         <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>AV</th>
                         <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Skills</th>
                         <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Team Value</th>
-                        <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Valda</th>
-                        <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Lägg till</th>
-                        <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Ta bort</th>
+                        <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Selected</th>
+                        <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Add</th>
+                        <th style={{ padding: '6px', border: '1px solid #e2e8f0' }}>Remove</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -274,7 +274,7 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
             )}
             {selectedPlayers.length > 0 && (
               <Box mt={3}>
-                <Text fontWeight="semibold">Nuvarande laguppställning:</Text>
+                <Text fontWeight="semibold">Current lineup:</Text>
                 <Box w="100%" overflowX="auto">
                   <VStack align="start" spacing={3}>
                     {selectedPlayers.map((p, i) => (
@@ -313,7 +313,7 @@ const TeamBuilderPanel = ({ isOpen, onClose, onTeamBuilt, defaultRoster }) => {
               onClose();
             }}
           >
-            Bygg lag
+            Build Team
           </Button>
         </ModalFooter>
       </ModalContent>
