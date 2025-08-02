@@ -15,7 +15,6 @@
 | Brawler          | Vid en 2-tärningsblockning får spelaren slå om en av tärningarna om båda är dåliga. |
 | Guard            | Tillåter spelaren att assistera även om hen är engagerad med en motståndare. |
 | Grab             | Vid Push-resultat kan spelaren välja vilken ruta motståndaren flyttas till (förhindrar sidlinje-surf). |
-
 | Multiple Block   | Tillåter spelaren att blocka två motståndare samtidigt, med reducerad tärningsmängd. |
 
 ## Färdigheter som påverkar antal tärningar eller val av resultat
