@@ -1,0 +1,42 @@
+Här kommer en **komplett lista över skills** som faktiskt påverkar **sannolikheten för turnover vid en block eller blitz** – uppdelat i:
+
+- ✅ **Anfallarens skills** som minskar turnover-risk
+- ❌ **Försvararens skills** som indirekt ökar turnover-risk
+- ⚠️ Skills som påverkar utfallet men inte turnover direkt
+
+---
+
+## ✅ Anfallarens skills som minskar turnover-risk
+
+| Skill            | Effekt på turnover-risk                            |
+|------------------|----------------------------------------------------|
+| **Block**        | Ignorerar "Both Down" → minskar turnover           |
+| **Wrestle**      | Ignorerar "Both Down" → minskar turnover           |
+| **Pro**          | 3+ test för att slå om en dålig tärning (t.ex. Skull) |
+| **Brawler**      | Får slå om "Both Down" (endast vid 1 tärning)      |
+| **Tackle**       | Gör att "Stumble" fungerar mot Dodge → fler säkra resultat |
+| **Frenzy**       | Ger två blockrundor → minskar turnover om första är dålig |
+| **Juggernaut**   | Förvandlar "Both Down" till "Push" vid blitz → minskar turnover vid blitz
+
+---
+
+## ❌ Försvararens skills som kan öka turnover-risk
+
+| Skill              | Effekt på anfallaren                             |
+|--------------------|--------------------------------------------------|
+| **Dodge**          | Gör "Stumble" ogiltig utan Tackle → färre säkra resultat |
+| **Foul Appearance**| 1/6 chans att blocken misslyckas → turnover direkt |
+| **Stand Firm / Side Step** | Påverkar positionering, inte turnover direkt |
+
+---
+
+## ⚠️ Skills som påverkar utfallet men inte turnover direkt
+
+| Skill              | Kommentar                                         |
+|--------------------|--------------------------------------------------|
+| **Mighty Blow / Claw / Piling On** | Påverkar skada, inte turnover      |
+| **Dauntless / Horns**              | Påverkar styrka, indirekt påverkan |
+| **Break Tackle / Jump Up**         | Påverkar rörelse, inte block       |
+| **Sure Hands / Catch / Dodge (anfallare)** | Påverkar andra moment, inte block |
+
+---
