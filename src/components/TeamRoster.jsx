@@ -58,6 +58,9 @@ const TeamRoster = ({ team, players, onSelectPlayer, placedPlayerIds }) => {
         <Heading size="md" color={headerColor}>
           {team} Team Roster ({players.length} players)
         </Heading>
+        <Text fontSize="md" color={team === 'Red' ? 'red.600' : 'blue.600'} mb={1}>
+          Team name: <b>{players.length > 0 && players[0].teamName ? players[0].teamName : team}</b>
+        </Text>
         
         {players.length === 0 ? (
           <Text>No players in roster. Add players using the form below.</Text>
@@ -75,6 +78,9 @@ const TeamRoster = ({ team, players, onSelectPlayer, placedPlayerIds }) => {
                   opacity={isPlaced ? 0.7 : 1}
                 >
                   <Flex justify="space-between" align="center" mb={1}>
+                    <Text fontWeight="bold" color="gray.700" mr={2}>
+                      {player.name} (#{typeof player.number !== 'undefined' ? player.number : '-'})
+                    </Text>
                     <Text fontWeight="bold" color="gray.700" mr={2}>{player.position}</Text>
                     <Button
                       size="sm"

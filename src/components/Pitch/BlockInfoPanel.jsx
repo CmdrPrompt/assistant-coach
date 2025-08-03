@@ -61,11 +61,11 @@ const BlockInfoPanel = ({
             <>
               <Text>
                 <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'}>
-                  {blocker.player.name} ({blocker.player.position} #{blocker.number})
+                  {blocker.player.name} ({blocker.player.position} #{typeof blocker.number !== 'undefined' ? blocker.number : (blocker.player && typeof blocker.player.number !== 'undefined' ? blocker.player.number : '-')}, {blocker.team})
                 </Badge> 
                 {' '}blocking{' '}
                 <Badge colorScheme={target.team === 'Red' ? 'red' : 'blue'}>
-                  {target.player.name} ({target.player.position} #{target.number})
+                  {target.player.name} ({target.player.position} #{typeof target.number !== 'undefined' ? target.number : (target.player && typeof target.player.number !== 'undefined' ? target.player.number : '-')}, {target.team})
                 </Badge>
               </Text>
               <Text>
@@ -75,12 +75,15 @@ const BlockInfoPanel = ({
               {blockOutcome.blockerAssistingPlayers && Array.isArray(blockOutcome.blockerAssistingPlayers) && blockOutcome.blockerAssistingPlayers.length > 0 && (
                 <Text fontSize="sm" ml={4} color="gray.600">
                   {blockOutcome.blockerAssistingPlayers.length === 1 ? 'Assist from:' : 'Assists from:'} {blockOutcome.blockerAssistingPlayers.map(ap => {
+                    // DEBUG: Log assisting player object to find missing number
+                    console.log('Assist player object:', ap);
+                    console.log('Assist player inner:', ap.player);
                     if (!ap || !ap.player) return null;
                     const showGuard = ap.reason === 'Guard skill';
                     return (
                       <span key={ap.player.id || Math.random()} style={{ marginRight: 8 }}>
                         <Badge colorScheme={blocker.team === 'Red' ? 'red' : 'blue'} mr={1}>
-                          {ap.player.name} ({ap.player.position})
+                          {ap.player.name} ({ap.player.position}, {ap.player.team})
                         </Badge>
                         {showGuard && (
                           <span style={{ fontSize: '0.85em', color: '#888', marginLeft: 2 }}>
@@ -104,7 +107,7 @@ const BlockInfoPanel = ({
                     return (
                       <span key={ap.player.id || Math.random()} style={{ marginRight: 8 }}>
                         <Badge colorScheme={target.team === 'Red' ? 'red' : 'blue'} mr={1}>
-                          {ap.player.name} ({ap.player.position})
+                          {ap.player.name} ({ap.player.position}, {ap.player.team})
                         </Badge>
                         {showGuard && (
                           <span style={{ fontSize: '0.85em', color: '#888', marginLeft: 2 }}>

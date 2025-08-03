@@ -9,14 +9,20 @@
  * @param {number} position.col - The column of the central position.
  * @returns {Array<object>} An array of 8 position objects, each with `row` and `col` properties.
  */
-export function getAdjacentPositions({ row, col }) {
+export function getAdjacentPositions({ row, col }, maxRows = 15, maxCols = 26) {
   const positions = [];
 
   for (let dr = -1; dr <= 1; dr++) {
     for (let dc = -1; dc <= 1; dc++) {
-      // Skip the center position itself
-      if (dr === 0 && dc === 0) continue;
-      positions.push({ row: row + dr, col: col + dc });
+      if (dr === 0 && dc === 0) continue; // hoppa över sig själv
+
+      const newRow = row + dr;
+      const newCol = col + dc;
+
+      // Kontrollera att positionen är inom spelplanen
+      if (newRow >= 0 && newRow < maxRows && newCol >= 0 && newCol < maxCols) {
+        positions.push({ row: newRow, col: newCol });
+      }
     }
   }
 

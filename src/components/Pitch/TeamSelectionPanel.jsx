@@ -8,7 +8,10 @@ const TeamSelectionPanel = ({
   openPlayerCreator
 }) => (
   <Box mb={2}>
-    <Text fontWeight="bold" mb={1} fontSize="md">Team Selection</Text>
+     <Text fontWeight="bold" fontSize="lg" mb={1}>Select Team</Text>
+     <Text fontSize="md" color={selectedTeam === 'Red' ? 'red.600' : 'blue.600'} mb={1}>
+       Team name: <b>{selectedTeam}</b>
+     </Text>
     <HStack spacing={4}>
       {TEAMS.map(team => (
         <label key={team} style={{ marginRight: 8 }}>

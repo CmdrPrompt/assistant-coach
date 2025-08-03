@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getAdjacentPositions } from '@/utils/getAdjacentPositions';
 import { 
   useBreakpointValue, 
   Box, 
@@ -269,6 +270,30 @@ const Pitch = () => {
         setBlocker(clickedSquare);
       } else if (!target) {
         if (clickedSquare.team === blocker.team) {
+          return;
+        }
+        // Only allow selecting adjacent opponents as block targets
+        const PITCH_ROWS = Math.floor(squares.length / PITCH_COLS);
+        const grid = [];
+        squares.forEach((square, idx) => {
+          const row = Math.floor(idx / PITCH_COLS);
+          const col = idx % PITCH_COLS;
+          if (!grid[row]) grid[row] = [];
+          grid[row][col] = square ? { player: square.player } : null;
+        });
+        const blockerPos = {
+          row: Math.floor(blocker.index / PITCH_COLS),
+          col: blocker.index % PITCH_COLS
+        };
+        const targetPos = {
+          row: Math.floor(clickedSquare.index / PITCH_COLS),
+          col: clickedSquare.index % PITCH_COLS
+        };
+        // Only allow block if target is adjacent
+        const isAdjacent = getAdjacentPositions(blockerPos, grid.length, grid[0].length)
+          .some(pos => pos.row === targetPos.row && pos.col === targetPos.col);
+        if (!isAdjacent) {
+          // Optionally show error or feedback
           return;
         }
         setTarget(clickedSquare);
